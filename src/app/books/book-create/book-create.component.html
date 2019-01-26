@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (submit)="onSaveBook(bookForm)" #bookForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="title"
+        [ngModel]="book?.title"
+        required
+        minlength="3"
+        placeholder="Book title"
+        #title="ngModel">
+      <mat-error *ngIf="title.invalid">Please enter a book title</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="authors"
+        [ngModel]="book?.authors"
+        required
+        minlength="3"
+        placeholder="Book authors"
+        #authors="ngModel">
+      <mat-error *ngIf="authors.invalid">Please enter a book author</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit">Save book</button>
+  </form>
+</mat-card>

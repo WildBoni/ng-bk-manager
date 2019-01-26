@@ -1,0 +1,10 @@
+<barcode-scanner-livestream type="ean" (valueChanges)="onValueChanges($event)"></barcode-scanner-livestream>
+<div [hidden]="!barcodeValue">
+    {{barcodeValue}}
+</div>
+<ul *ngIf="books">
+  <li *ngFor="let book of books">
+    {{ book.volumeInfo.title }} | {{ book.volumeInfo.authors[0] }}
+    <button (click)="onAddBook(book.volumeInfo.title, book.volumeInfo.authors[0], book.id)">ADD</button>
+  </li>
+</ul>

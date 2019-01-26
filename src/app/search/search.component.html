@@ -1,0 +1,10 @@
+<div>
+  <input type="search" placeholder="Search book" #search id="search">
+  <button (click)="OnSearch(search.value)">Search</button>
+</div>
+<div *ngIf="books">
+  <div *ngFor="let book of books">
+    {{ book.volumeInfo.title }} | {{ book.volumeInfo.authors }}
+    <button (click)="onAddBook(book.volumeInfo.title, book.volumeInfo.authors[0], book.id)">ADD</button>
+  </div>
+</div>
