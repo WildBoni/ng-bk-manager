@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
       })
   }
 
-  onAddBook(title: string, authors: string, id: string) {
+  onAddBook(title: string, authors: string[], id: string) {
     this.bookService.addBook(title, authors);
     const updatedBooks = this.books.filter(book => book.id !== id);
     this.books = updatedBooks;

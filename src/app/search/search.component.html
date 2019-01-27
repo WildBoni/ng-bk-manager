@@ -5,6 +5,6 @@
 <div *ngIf="books">
   <div *ngFor="let book of books">
     {{ book.volumeInfo.title }} | {{ book.volumeInfo.authors }}
-    <button (click)="onAddBook(book.volumeInfo.title, book.volumeInfo.authors[0], book.id)">ADD</button>
+    <button (click)="onAddBook(book.volumeInfo.title, book.volumeInfo.authors, book.id)">ADD</button>
   </div>
 </div>

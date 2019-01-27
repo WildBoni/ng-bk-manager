@@ -1,5 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
+// import { NgForm } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+  FormArray
+} from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -13,18 +20,49 @@ import { AuthService } from "../../auth/auth.service";
   styleUrls: ['./book-create.component.css']
 })
 export class BookCreateComponent implements OnInit, OnDestroy {
-  enteredAuthors = "";
-  enteredTitle = "";
   book: Book;
+  authorsData = [];
   isLoading = false;
   private mode = 'create';
   private bookId: string;
   private authStatusSub: Subscription;
 
+  bookForm = this.fb.group({
+    title: ['', Validators.required],
+    authors: this.fb.array([
+      this.fb.control('')
+    ])
+  });
+
+  get authors() {
+    return this.bookForm.get('authors') as FormArray
+  }
+
+  getAuthors() {
+    while(this.authors.length < this.authorsData.length) {
+      this.authors.push(this.fb.control(''));
+    }
+
+    this.bookForm.patchValue({
+      authors: this.authorsData
+    });
+  }
+
+  addAuthor() {
+    this.authors.push(this.fb.control(''));
+  }
+
+  removeAuthor(i) {
+    console.log(i);
+    this.authors.removeAt(i);
+    console.log(this.authors);
+  }
+
   constructor(
     public bookService: BookService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
@@ -40,12 +78,12 @@ export class BookCreateComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.bookService.getBook(this.bookId).subscribe(bookData => {
           this.isLoading = false;
-          this.book = {
-            id: bookData._id,
-            title: bookData.title,
-            authors: bookData.authors,
-            creator: bookData.creator
-          }
+          this.bookForm.patchValue({
+            title: bookData.title
+          });
+          this.authorsData = bookData.authors;
+          console.log(this.authorsData);
+          this.getAuthors();
         });
       } else {
         this.mode = 'create';
@@ -54,24 +92,24 @@ export class BookCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSaveBook(form: NgForm) {
-    if (form.invalid) {
+  onSaveBook() {
+    if (this.bookForm.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
       this.bookService.addBook(
-        form.value.title,
-        form.value.authors
+        this.bookForm.value.title,
+        this.bookForm.value.authors
       );
     } else {
       this.bookService.updateBook(
         this.bookId,
-        form.value.title,
-        form.value.authors
+        this.bookForm.value.title,
+        this.bookForm.value.authors
       );
     }
-    form.resetForm();
+    this.bookForm.reset();
     this.isLoading = false;
   }
 

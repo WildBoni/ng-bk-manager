@@ -51,14 +51,14 @@ export class BookService {
     return this.http.get<{
       _id: string,
       title: string,
-      authors: string,
+      authors: string[],
       creator: string
     }>(
       BACKEND_URL + id
     );
   }
 
-  addBook(title: string, authors: string) {
+  addBook(title: string, authors: string[]) {
     const book: Book = {
       id: null,
       title: title,
@@ -76,7 +76,7 @@ export class BookService {
         });
   }
 
-  updateBook(id: string, title: string, authors: string) {
+  updateBook(id: string, title: string, authors: string[]) {
     const book: Book = {
       id: id,
       title: title,

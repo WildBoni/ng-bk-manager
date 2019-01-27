@@ -1,7 +1,7 @@
 export interface Book {
   id: string;
   title: string;
-  authors: string;
+  authors: string[];
   creator: string;
 }
 // export interface Book {

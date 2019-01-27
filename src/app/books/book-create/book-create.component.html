@@ -1,33 +1,32 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (submit)="onSaveBook(bookForm)" #bookForm="ngForm" *ngIf="!isLoading">
+  <form (ngSubmit)="onSaveBook()" [formGroup]="bookForm" *ngIf="!isLoading">
     <mat-form-field>
       <input
         matInput
         type="text"
-        name="title"
-        [ngModel]="book?.title"
+        formControlName="title"
         required
-        minlength="3"
-        placeholder="Book title"
-        #title="ngModel">
-      <mat-error *ngIf="title.invalid">Please enter a book title</mat-error>
+        placeholder="Book title">
+      <!-- <mat-error *ngIf="title.invalid">Please enter a book title</mat-error> -->
     </mat-form-field>
-    <mat-form-field>
-      <input
+    <div formArrayName="authors">
+      <h3>Authors</h3>
+      <button type="button" (click)="addAuthor()">+</button>
+      <mat-form-field *ngFor="let author of authors.controls; let i = index">
+        <button (click)="removeAuthor(i)">X</button>
+        <input
         matInput
         type="text"
-        name="authors"
-        [ngModel]="book?.authors"
-        required
-        minlength="3"
-        placeholder="Book authors"
-        #authors="ngModel">
-      <mat-error *ngIf="authors.invalid">Please enter a book author</mat-error>
-    </mat-form-field>
+        [formControlName]="i"
+        placeholder="Book author">
+        <!-- <mat-error *ngIf="author.invalid">Please enter a book author</mat-error> -->
+      </mat-form-field>
+    </div>
     <button
       mat-raised-button
       color="accent"
-      type="submit">Save book</button>
+      type="submit"
+      [disabled]="!bookForm.valid">Save book</button>
   </form>
 </mat-card>

@@ -1,6 +1,7 @@
 const Book = require('../models/book');
 
 exports.createBook = (req, res, next) => {
+  console.log(req.body);
   const book = new Book({
     title: req.body.title,
     authors: req.body.authors,

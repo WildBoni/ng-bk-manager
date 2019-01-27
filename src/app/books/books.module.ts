@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { RouterModule } from '@angular/router';
 
 import { AngularMaterialModule } from '../angular-material.module';
@@ -20,6 +21,7 @@ import { BookSearchComponent } from './book-search/book-search.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularMaterialModule,
     RouterModule
   ]
