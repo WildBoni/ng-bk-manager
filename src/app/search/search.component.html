@@ -1,5 +1,5 @@
 <div>
-  <input type="search" placeholder="Search book" #search id="search">
+  <input type="search" (keyup)="inputChanged(search.value)" placeholder="Search book" #search id="search">
   <button (click)="OnSearch(search.value)">Search</button>
 </div>
 <div *ngIf="books">
