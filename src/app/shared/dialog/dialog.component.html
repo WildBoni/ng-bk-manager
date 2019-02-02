@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+<mat-dialog-content>
+  {{data.description}}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button *ngIf="goToBooks" (click)="navigateTo()">Go to My Books</button>
+  <button mat-button *ngIf="addAnotherBook" mat-dialog-close color="warn">Add another book</button>
+</mat-dialog-actions>

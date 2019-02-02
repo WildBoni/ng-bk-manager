@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild
+} from '@angular/core';
 
 import { BookService } from '../books/book.service';
 import { GoogleBookApiService } from '../google-book-api.service';
@@ -8,6 +13,8 @@ import { Book } from '../books/book.model';
 
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -20,6 +27,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   private modelChanged: Subject<string> = new Subject<string>();
   private subscription: Subscription;
   debounceTime = 500;
+
+  displayedColumns: string[] = ['image', 'title', 'authors', 'languages',
+    'categories', 'pageCount', 'publisher', 'publisherDate', 'previewLink', 'add'];
+  dataSource = new MatTableDataSource<Book>();
+
+  // @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private googleBookApiService : GoogleBookApiService,
@@ -44,12 +58,18 @@ export class SearchComponent implements OnInit, OnDestroy {
   OnSearch(s) {
     this.googleBookApiService.searchBooks(s)
       .subscribe((data) => {
+        this.dataSource.data = data.items;
         this.books = data.items;
-      })
+        this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+      });
   }
 
-  onAddBook(title: string, authors: string[], id: string) {
-    this.bookService.addBook(title, authors);
+  onAddBook(id: string, title: string, authors: string[], thumbnail: string,
+    languages: string[], categories: string[], pageCount: number, 
+    publisher: string, publisherDate: string, previewLink: string) {
+    this.bookService.addBook(title, authors, thumbnail, languages, categories,
+      pageCount, publisher, publisherDate, previewLink);
     const updatedBooks = this.books.filter(book => book.id !== id);
     this.books = updatedBooks;
   }
@@ -57,13 +77,5 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-  //
-  // OnAddBook(book) {
-  //   console.log(book.volumeInfo.title);
-  //   this.book.push(book.volumeInfo.title);
-  //   console.log(this.book);
-  //   this.localBookService.addBook(book.volumeInfo.title)
-  // }
 
 }

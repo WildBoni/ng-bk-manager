@@ -52,26 +52,4 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.authStatusSub.unsubscribe();
   }
 
-  // getBooks(): void {
-  //   this.bookService.getBooks()
-  //     .subscribe(books => this.books = books);
-  // }
-  //
-  // add(title: string): void {
-  //   title = title.trim();
-  //   if(!title) { return; }
-  //   let pippo: Book = {
-  //     id: null,
-  //     volumeInfo: {
-  //       title: title,
-  //       authors: []
-  //     }
-  //   }
-  //   this.bookService.addBook(pippo as Book)
-  //     .subscribe(book => {
-  //       this.books.push(book);
-  //     });
-  // }
-  //
-
 }

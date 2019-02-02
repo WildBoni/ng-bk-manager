@@ -34,8 +34,11 @@ export class ScannerComponent implements AfterViewInit {
     this.searchResult(this.barcodeValue);
   }
 
-  onAddBook(title: string, authors: string[], id: string) {
-    this.bookService.addBook(title, authors);
+  onAddBook(id: string, title: string, authors: string[], thumbnail: string,
+    languages: string[], categories: string[], pageCount: number,
+    publisher: string, publisherDate: string, previewLink: string) {
+    this.bookService.addBook(title, authors, thumbnail, languages, categories,
+      pageCount, publisher, publisherDate, previewLink);
     const updatedBooks = this.books.filter(book => book.id !== id);
     this.books = updatedBooks;
   }

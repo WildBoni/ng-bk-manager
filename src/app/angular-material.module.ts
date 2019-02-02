@@ -7,7 +7,13 @@ import {
   MatToolbarModule,
   MatProgressSpinnerModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatSnackBarModule,
+  MatIconModule,
+  MAT_SNACK_BAR_DATA
 } from "@angular/material";
 
 @NgModule({
@@ -18,7 +24,15 @@ import {
     MatToolbarModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatIconModule
+  ],
+  providers: [
+    {provide: MAT_SNACK_BAR_DATA, useValue: {duration: 2500}}
   ]
 })
 export class AngularMaterialModule {}

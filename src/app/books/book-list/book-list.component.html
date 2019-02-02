@@ -4,8 +4,27 @@
     <mat-expansion-panel-header>
       {{ book.title }}
     </mat-expansion-panel-header>
+    <img src="{{ book.thumbnail }}" alt="">
     <p>
       {{ book.authors }}
+    </p>
+    <p>
+      {{ book.languages }}
+    </p>
+    <p>
+      {{ book.categories }}
+    </p>
+    <p>
+      {{ book.pageCount }}
+    </p>
+    <p>
+      {{ book.publisher }}
+    </p>
+    <p>
+      {{ book.publisherDate }}
+    </p>
+    <p>
+      {{ book.previewLink }}
     </p>
     <mat-action-row *ngIf="userIsAuthenticated && userId === book.creator">
       <a mat-button color="primary" [routerLink]="['/edit', book.id]">EDIT</a>

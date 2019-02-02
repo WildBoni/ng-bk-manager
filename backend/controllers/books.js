@@ -1,11 +1,53 @@
 const Book = require('../models/book');
 
+exports.getBooks = (req, res, next) => {
+  Book.find({creator: req.userData.userId})
+  .sort({_id: -1})
+  .then(documents => {
+    res.status(200).json({
+      message: 'Books fetched successfully!',
+      books: documents
+    });
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Fetching books failed!"
+    });
+  });
+}
+
+exports.getBook = (req, res, next) => {
+  Book.findById(req.params.id).then(book => {
+    if (book) {
+      if (book.creator == req.userData.userId) {
+        res.status(200).json(book);
+      } else {
+        res.status(404).json({message: 'Book not found'});
+      }
+      // res.status(200).json(book);
+    } else {
+      res.status(404).json({message: 'Book not found'});
+    }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Fetching book failed!"
+    });
+  });
+}
+
 exports.createBook = (req, res, next) => {
-  console.log(req.body);
   const book = new Book({
     title: req.body.title,
     authors: req.body.authors,
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    thumbnail: req.body.thumbnail,
+    languages: req.body.languages,
+    categories: req.body.categories,
+    pageCount: req.body.pageCount,
+    publisher: req.body.publisher,
+    publisherDate: req.body.publisherDate,
+    previewLink: req.body.previewLink
   });
   book.save().then(createdBook => {
     res.status(201).json({
@@ -25,7 +67,14 @@ exports.updateBook = (req, res, next) => {
     _id: req.body.id,
     title: req.body.title,
     authors: req.body.authors,
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    thumbnail: req.body.thumbnail,
+    languages: req.body.languages,
+    categories: req.body.categories,
+    pageCount: req.body.pageCount,
+    publisher: req.body.publisher,
+    publisherDate: req.body.publisherDate,
+    previewLink: req.body.previewLink
   });
   Book.updateOne(
     { _id: req.params.id, creator: req.userData.userId },
@@ -42,36 +91,6 @@ exports.updateBook = (req, res, next) => {
       message: "Couldn't update book!"
     });
   });;
-}
-
-exports.getBooks = (req, res, next) => {
-  Book.find()
-  .then(documents => {
-    res.status(200).json({
-      message: 'Books fetched successfully!',
-      books: documents
-    });
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: "Fetching books failed!"
-    });
-  });
-}
-
-exports.getBook = (req, res, next) => {
-  Book.findById(req.params.id).then(book => {
-    if (book) {
-      res.status(200).json(book);
-    } else {
-      res.status(404).json({message: 'Book not found'});
-    }
-  })
-  .catch(error => {
-    res.status(500).json({
-      message: "Fetching book failed!"
-    });
-  });
 }
 
 exports.deleteBook = (req, res, next) => {

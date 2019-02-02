@@ -4,9 +4,9 @@ const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 
-router.get("", BookController.getBooks);
+router.get("", checkAuth, BookController.getBooks);
 
-router.get("/:id", BookController.getBook)
+router.get("/:id", checkAuth, BookController.getBook)
 
 router.post("", checkAuth, BookController.createBook);
 

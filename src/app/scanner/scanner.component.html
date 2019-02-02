@@ -4,7 +4,21 @@
 </div>
 <ul *ngIf="books">
   <li *ngFor="let book of books">
-    {{ book.volumeInfo.title }} | {{ book.volumeInfo.authors }}
-    <button (click)="onAddBook(book.volumeInfo.title, book.volumeInfo.authors, book.id)">ADD</button>
+    {{ book.volumeInfo.title }} |
+    {{ book.volumeInfo.authors }} |
+    <img src="{{ book.volumeInfo.imageLinks.thumbnail }}" /> |
+    {{ book.volumeInfo.language }} |
+    {{ book.volumeInfo.categories }} |
+    {{ book.volumeInfo.pageCount }} |
+    {{ book.volumeInfo.publisher }} |
+    {{ book.volumeInfo.publisherDate }} |
+    {{ book.volumeInfo.previewLink }} |
+    <button (click)="onAddBook(book.id, book.volumeInfo.title,
+      book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail,
+      book.volumeInfo.language, book.volumeInfo.categories,
+      book.volumeInfo.pageCount, book.volumeInfo.publisher,
+      book.volumeInfo.publisherDate, book.volumeInfo.previewLink)">
+      ADD
+    </button>
   </li>
 </ul>

@@ -3,11 +3,11 @@ export interface Book {
   title: string;
   authors: string[];
   creator: string;
+  thumbnail?: string;
+  languages?: string[];
+  categories?: string[];
+  pageCount?: number;
+  publisher?: string;
+  publisherDate?: string;
+  previewLink?: string;
 }
-// export interface Book {
-//   id: number;
-//   volumeInfo: {
-//     title: string;
-//     authors: string[];
-//   }
-// }

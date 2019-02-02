@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-// import { NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import {
   FormGroup,
   FormControl,
@@ -22,17 +22,13 @@ import { AuthService } from "../../auth/auth.service";
 export class BookCreateComponent implements OnInit, OnDestroy {
   book: Book;
   authorsData = [];
+  languagesData = [];
+  categoriesData = [];
   isLoading = false;
   private mode = 'create';
   private bookId: string;
   private authStatusSub: Subscription;
-
-  bookForm = this.fb.group({
-    title: ['', Validators.required],
-    authors: this.fb.array([
-      this.fb.control('')
-    ])
-  });
+  bookForm: FormGroup;
 
   get authors() {
     return this.bookForm.get('authors') as FormArray
@@ -53,9 +49,51 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   }
 
   removeAuthor(i) {
-    console.log(i);
     this.authors.removeAt(i);
-    console.log(this.authors);
+  }
+
+  get languages() {
+    return this.bookForm.get('languages') as FormArray
+  }
+
+  getLanguages() {
+    while(this.languages.length < this.languagesData.length) {
+      this.languages.push(this.fb.control(''));
+    }
+
+    this.bookForm.patchValue({
+      languages: this.languagesData
+    });
+  }
+
+  addLanguage() {
+    this.languages.push(this.fb.control(''));
+  }
+
+  removeLanguage(i) {
+    this.languages.removeAt(i);
+  }
+
+  get categories() {
+    return this.bookForm.get('categories') as FormArray
+  }
+
+  getCategories() {
+    while(this.categories.length < this.categoriesData.length) {
+      this.categories.push(this.fb.control(''));
+    }
+
+    this.bookForm.patchValue({
+      categories: this.categoriesData
+    });
+  }
+
+  addCategory() {
+    this.categories.push(this.fb.control(''));
+  }
+
+  removeCategory(i) {
+    this.categories.removeAt(i);
   }
 
   constructor(
@@ -66,6 +104,24 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.bookForm = this.fb.group({
+      title: ['', Validators.required],
+      authors: this.fb.array([
+        this.fb.control('')
+      ]),
+      thumbnail: [''],
+      languages: this.fb.array([
+        this.fb.control('')
+      ]),
+      categories: this.fb.array([
+        this.fb.control('')
+      ]),
+      pageCount: ['', Validators.pattern("^[0-9]*$")],
+      publisher: [''],
+      publisherDate: [''],
+      previewLink: ['']
+    });
+
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
         this.isLoading = false;
@@ -79,11 +135,19 @@ export class BookCreateComponent implements OnInit, OnDestroy {
         this.bookService.getBook(this.bookId).subscribe(bookData => {
           this.isLoading = false;
           this.bookForm.patchValue({
-            title: bookData.title
+            title: bookData.title,
+            thumbnail: bookData.thumbnail,
+            pageCount: bookData.pageCount,
+            publisher: bookData.publisher,
+            publisherDate: bookData.publisherDate,
+            previewLink: bookData.previewLink
           });
           this.authorsData = bookData.authors;
-          console.log(this.authorsData);
           this.getAuthors();
+          this.languagesData = bookData.languages;
+          this.getLanguages();
+          this.categoriesData = bookData.categories;
+          this.getCategories();
         });
       } else {
         this.mode = 'create';
@@ -92,7 +156,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSaveBook() {
+  onSaveBook(form: NgForm) {
     if (this.bookForm.invalid) {
       return;
     }
@@ -100,16 +164,30 @@ export class BookCreateComponent implements OnInit, OnDestroy {
     if (this.mode === 'create') {
       this.bookService.addBook(
         this.bookForm.value.title,
-        this.bookForm.value.authors
+        this.bookForm.value.authors,
+        this.bookForm.value.thumbnail,
+        this.bookForm.value.languages,
+        this.bookForm.value.categories,
+        this.bookForm.value.pageCount,
+        this.bookForm.value.publisher,
+        this.bookForm.value.publisherDate,
+        this.bookForm.value.previewLink
       );
+    form.resetForm();
     } else {
       this.bookService.updateBook(
         this.bookId,
         this.bookForm.value.title,
-        this.bookForm.value.authors
+        this.bookForm.value.authors,
+        this.bookForm.value.thumbnail,
+        this.bookForm.value.languages,
+        this.bookForm.value.categories,
+        this.bookForm.value.pageCount,
+        this.bookForm.value.publisher,
+        this.bookForm.value.publisherDate,
+        this.bookForm.value.previewLink
       );
     }
-    this.bookForm.reset();
     this.isLoading = false;
   }
 
