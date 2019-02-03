@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import {
+  MatButtonModule,
+  MatListModule,
+  MatIconModule,
   MatInputModule,
   MatCardModule,
-  MatButtonModule,
   MatToolbarModule,
+  MatSidenavModule,
   MatProgressSpinnerModule,
   MatExpansionModule,
   MatDialogModule,
@@ -12,24 +15,25 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatSnackBarModule,
-  MatIconModule,
   MAT_SNACK_BAR_DATA
 } from "@angular/material";
 
 @NgModule({
   exports: [
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule,
     MatToolbarModule,
-    MatExpansionModule,
+    MatSidenavModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule,
-    MatIconModule
+    MatSnackBarModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DATA, useValue: {duration: 2500}}

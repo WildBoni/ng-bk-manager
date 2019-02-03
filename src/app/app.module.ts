@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { BarecodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 
@@ -19,6 +19,7 @@ import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { HeaderComponent } from './header/header.component';
+import { SidenavListComponent } from './sidenav/sidenav-list.component';
 import { ErrorComponent } from './shared/error/error.component';
 
 import { DialogComponent } from './shared/dialog/dialog.component';
@@ -31,6 +32,7 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     HomeComponent,
     ScannerComponent,
     HeaderComponent,
+    SidenavListComponent,
     ErrorComponent,
     DialogComponent
   ],
@@ -42,7 +44,7 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     HttpModule,
     HttpClientModule,
     AngularMaterialModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     BooksModule
   ],
   providers: [

@@ -1,13 +1,21 @@
-ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 a {
   text-decoration: none;
   color: white;
+}
+
+a:hover,
+a:active {
+  color: lightgray;
+}
+
+ul {
+  display: flex;
+}
+
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .spacer {

@@ -1,8 +1,8 @@
 import {
   Component,
-  OnInit,
   EventEmitter,
   Output,
+  OnInit,
   OnDestroy
 } from '@angular/core';
 
@@ -11,35 +11,35 @@ import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-sidenav-list',
+  templateUrl: './sidenav-list.component.html',
+  styleUrls: ['./sidenav-list.component.css']
 })
-export class HeaderComponent implements OnInit {
-  @Output() sidenavToggle = new EventEmitter<void>();
+export class SidenavListComponent implements OnInit, OnDestroy {
+  @Output() closeSidenav = new EventEmitter<void>();
   userIsAuthenticated = false;
   private authListenerSub: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authListenerSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
-      })
-  }
+      });
 
-  onToggleSidenav() {
-    this.sidenavToggle.emit();
   }
 
   onLogout() {
     this.authService.logout();
   }
 
+  onClose() {
+    this.closeSidenav.emit();
+  }
+
   ngOnDestroy() {
     this.authListenerSub.unsubscribe();
   }
-
 }
