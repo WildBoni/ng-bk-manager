@@ -1,0 +1,27 @@
+{
+  "short_name": "BkMngr",
+  "name": "Book Manager",
+  "description": "MEAN stack app for managing users libraries",
+  "icons": [
+    {
+      "src": "/assets/icon-48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/home",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3367D6"
+}

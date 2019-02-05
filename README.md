@@ -1,27 +1,61 @@
-# AngularFirestore
+# Angular Book Manager (BKMNGR) - UNDER DEVELOPMENT
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
+Angular Book Manager is an open-source online database where you can store your books.
 
-## Development server
+  - MongoDb database
+  - NodeJs Backend
+  - Angular frontend
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+These are the main features (please note that BKMNGR is still under development):
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [x] Automatically add books by scanning the barcode!
+- [x] Add books searching in Google Books API
+- [x] Responsive layout: access your library database from mobile
+- [x] Edit/Update your library
+- [x] Advanced search filters
+- [x] Login / Subscribe with different accounts (JWT security)
+- [ ] Add books to wishlist
+- [ ] Add books to favourites
+- [ ] Keep track of books you lend
+- [ ] Rate and review books
+- [ ] Find other users with same interests
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* First of all, make sure you have Node and npm installed!
+* Create a new MongoDb (you can use Atlas)
+* Run npm install in your project folder and wait for the installation process to complete
+* Remember to update envirnoment and nodemon variables with your correct configuration!
+* Run ng serve --open for opening a browser window on localhost
+* Run npm run start:server for getting the backend up and running
 
-## Running unit tests
+## Other cool ideas
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+These features may be implemented later on...
 
-## Running end-to-end tests
+* PWA app with offline capabilities
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Sources
 
-## Further help
+Book Manager is powered by:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Backend
+- MongoDb
+- Node
+- Mongoose
+- Express
+
+* Frontend
+- Angular
+- RxJs
+- DataTables
+- Quagga (ngx barcode scanner)
+
+* API
+- Google Books
+
+## Help me!
+
+Angular Book Manager is an open-source project and any help is much appreciated: feel free to join in!

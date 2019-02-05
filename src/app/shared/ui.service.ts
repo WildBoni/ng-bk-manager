@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-// import { Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material';
@@ -9,12 +9,18 @@ import { DialogComponent } from './dialog/dialog.component';
   providedIn: 'root'
 })
 export class UIService {
+  private scanStatus = new Subject<boolean>();
+
   // loadingStateChanged = new Subject<boolean>();
   constructor(
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router
   ) {}
+
+  getScanStatusListener() {
+    return this.scanStatus.asObservable();
+  }
 
   showSnackbar(message, action, duration) {
     const snackBarRef = this.snackbar.open(
@@ -45,7 +51,8 @@ export class UIService {
     title: string,
     description: string,
     goToBooks: boolean,
-    addAnotherBook: boolean
+    addAnotherBook: boolean,
+    scanAgain: boolean
   ) {
     // const dialogConfig = new MatDialogConfig();
     //
@@ -57,8 +64,15 @@ export class UIService {
         title: title,
         description: description,
         goToBooks: goToBooks,
-        addAnotherBook: addAnotherBook
+        addAnotherBook: addAnotherBook,
+        scanAgain: scanAgain
       }
+    });
+
+    // dialogRef.close('Closed!');
+    //
+    dialogRef.afterClosed().subscribe(result => {
+       this.scanStatus.next(true);
     });
 
   }

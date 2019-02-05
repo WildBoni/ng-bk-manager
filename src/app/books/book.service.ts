@@ -42,8 +42,9 @@ export class BookService {
             categories: book.categories,
             pageCount: book.pageCount,
             publisher: book.publisher,
-            publisherDate: book.publisherDate,
-            previewLink: book.previewLink
+            publishedDate: book.publishedDate,
+            previewLink: book.previewLink,
+            ean13: book.ean13
           };
         });
       }))
@@ -69,16 +70,18 @@ export class BookService {
       categories: string[],
       pageCount: number,
       publisher: string,
-      publisherDate: string,
-      previewLink: string
+      publishedDate: string,
+      previewLink: string,
+      ean13: string
     }>(
       BACKEND_URL + id
     );
   }
 
-  addBook(title: string, authors: string[], thumbnail: string,
+  addBook(mode: string, title: string, authors: string[], thumbnail: string,
     languages: string[], categories: string[], pageCount: number,
-    publisher: string, publisherDate: string, previewLink: string) {
+    publisher: string, publishedDate: string, previewLink: string,
+    ean13: string) {
     const book: Book = {
       id: null,
       title: title,
@@ -89,30 +92,52 @@ export class BookService {
       categories: categories,
       pageCount: pageCount,
       publisher: publisher,
-      publisherDate: publisherDate,
-      previewLink: previewLink
+      publishedDate: publishedDate,
+      previewLink: previewLink,
+      ean13: ean13
     };
-    this.http
-      .post<{message: string, bookId: string}>(BACKEND_URL, book)
-        .subscribe((responseData) => {
-          const id = responseData.bookId;
-          book.id = id;
-          this.books.push(book);
-          this.booksUpdated.next([...this.books]);
-          this.uiService.showDialog(
-            'Book inserted sucessfully!',
-            'What do you want to do now?',
-            true,
-            true
-          );
-          // this.router.navigate(["/"]);
-        });
+    switch (mode)
+    {
+       case "scan":
+         this.http
+         .post<{message: string, bookId: string}>(BACKEND_URL, book)
+         .subscribe((responseData) => {
+           const id = responseData.bookId;
+           book.id = id;
+           this.books.push(book);
+           this.booksUpdated.next([...this.books]);
+           this.uiService.showDialog(
+             'Book inserted sucessfully!',
+             'What do you want to do now?',
+             true,
+             false,
+             true
+           );
+         });
+         break;
+       default:
+         this.http
+         .post<{message: string, bookId: string}>(BACKEND_URL, book)
+         .subscribe((responseData) => {
+           const id = responseData.bookId;
+           book.id = id;
+           this.books.push(book);
+           this.booksUpdated.next([...this.books]);
+           this.uiService.showDialog(
+             'Book inserted sucessfully!',
+             'What do you want to do now?',
+             true,
+             true,
+             false
+           );
+         });
+    }
   }
 
   updateBook(id: string, title: string, authors: string[],
     thumbnail: string, languages: string[], categories: string[],
-    pageCount: number, publisher: string, publisherDate: string,
-    previewLink: string) {
+    pageCount: number, publisher: string, publishedDate: string,
+    previewLink: string, ean13: string) {
     const book: Book = {
       id: id,
       title: title,
@@ -123,8 +148,9 @@ export class BookService {
       categories: categories,
       pageCount: pageCount,
       publisher: publisher,
-      publisherDate: publisherDate,
-      previewLink: previewLink
+      publishedDate: publishedDate,
+      previewLink: previewLink,
+      ean13: ean13
     };
     this.http
       .put(BACKEND_URL + id, book)

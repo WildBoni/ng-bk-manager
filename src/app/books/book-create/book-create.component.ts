@@ -118,8 +118,9 @@ export class BookCreateComponent implements OnInit, OnDestroy {
       ]),
       pageCount: ['', Validators.pattern("^[0-9]*$")],
       publisher: [''],
-      publisherDate: [''],
-      previewLink: ['']
+      publishedDate: [''],
+      previewLink: [''],
+      ean13: ['']
     });
 
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -139,8 +140,9 @@ export class BookCreateComponent implements OnInit, OnDestroy {
             thumbnail: bookData.thumbnail,
             pageCount: bookData.pageCount,
             publisher: bookData.publisher,
-            publisherDate: bookData.publisherDate,
-            previewLink: bookData.previewLink
+            publishedDate: bookData.publishedDate,
+            previewLink: bookData.previewLink,
+            ean13: bookData.ean13
           });
           this.authorsData = bookData.authors;
           this.getAuthors();
@@ -163,6 +165,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.mode === 'create') {
       this.bookService.addBook(
+        "insert",
         this.bookForm.value.title,
         this.bookForm.value.authors,
         this.bookForm.value.thumbnail,
@@ -170,8 +173,9 @@ export class BookCreateComponent implements OnInit, OnDestroy {
         this.bookForm.value.categories,
         this.bookForm.value.pageCount,
         this.bookForm.value.publisher,
-        this.bookForm.value.publisherDate,
-        this.bookForm.value.previewLink
+        this.bookForm.value.publishedDate,
+        this.bookForm.value.previewLink,
+        this.bookForm.value.ean13
       );
     form.resetForm();
     } else {
@@ -184,8 +188,9 @@ export class BookCreateComponent implements OnInit, OnDestroy {
         this.bookForm.value.categories,
         this.bookForm.value.pageCount,
         this.bookForm.value.publisher,
-        this.bookForm.value.publisherDate,
-        this.bookForm.value.previewLink
+        this.bookForm.value.publishedDate,
+        this.bookForm.value.previewLink,
+        this.bookForm.value.ean13
       );
     }
     this.isLoading = false;

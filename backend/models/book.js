@@ -9,8 +9,11 @@ const bookSchema = mongoose.Schema({
   categories: { type: [String] },
   pageCount: { type: Number },
   publisher: { type: String },
-  publisherDate: { type: String },
-  previewLink: { type: String }
+  publishedDate: { type: String },
+  previewLink: { type: String },
+  ean13: { type: String }
+  // favourite: { type: Boolean },
+  // toRead: { type: Boolean }
 });
 
 module.exports = mongoose.model('Book', bookSchema);

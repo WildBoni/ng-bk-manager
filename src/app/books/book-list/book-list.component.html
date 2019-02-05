@@ -1,42 +1,47 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-accordion multi="true" *ngIf="books.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let book of books">
-    <mat-expansion-panel-header>
-      {{ book.title }}
-    </mat-expansion-panel-header>
-    <img src="{{ book.thumbnail }}" alt="">
-    <p>
-      {{ book.authors }}
-    </p>
-    <p>
-      {{ book.languages }}
-    </p>
-    <p>
-      {{ book.categories }}
-    </p>
-    <p>
-      {{ book.pageCount }}
-    </p>
-    <p>
-      {{ book.publisher }}
-    </p>
-    <p>
-      {{ book.publisherDate }}
-    </p>
-    <p>
-      {{ book.previewLink }}
-    </p>
-    <mat-action-row *ngIf="userIsAuthenticated && userId === book.creator">
-      <a mat-button color="primary" [routerLink]="['/edit', book.id]">EDIT</a>
-      <button
-        mat-button
-        color="warn"
-        (click)="onDelete(book.id)">
+<mat-form-field *ngIf="!isLoading">
+  <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<mat-table *ngIf="!isLoading" [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef>Image</th>
+    <td mat-cell *matCellDef="let book">
+      <img src="{{ book.thumbnail }}" alt="">
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+    <td mat-cell *matCellDef="let book">{{ book.title }}</td>
+  </ng-container>
+  <ng-container matColumnDef="authors">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Authors</th>
+    <td mat-cell *matCellDef="let book">{{ book.authors }}</td>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Details</th>
+    <td mat-cell *matCellDef="let book">
+      <a mat-button color="primary" [routerLink]="['/edit', book.id]">
+        DETAILS
+      </a>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Delete</th>
+    <td mat-cell *matCellDef="let book">
+      <button mat-button color="warn" (click)="onDelete(book.id)">
         DELETE
       </button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<p class="info-text mat-body-1" *ngIf="books.length <= 0 && !isLoading">
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-header-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+</mat-table>
+<mat-paginator *ngIf="!isLoading" #paginator [pageSize]="5"
+  [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons>
+</mat-paginator>
+
+<!-- <p class="info-text mat-body-1" *ngIf="books.length <= 0 && !isLoading">
   No books added yet!
-</p>
+</p> -->

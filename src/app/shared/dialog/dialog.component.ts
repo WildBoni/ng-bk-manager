@@ -18,9 +18,14 @@ export class DialogComponent {
 
   goToBooks: boolean = this.data.goToBooks;
   addAnotherBook: boolean = this.data.addAnotherBook;
+  scanAgain: boolean = this.data.scanAgain;
 
   navigateTo(){
     this.dialogRef.close();
     this.router.navigate(["/books"]);
+  }
+
+  scanAnother(){
+    this.dialogRef.close("start");
   }
 }

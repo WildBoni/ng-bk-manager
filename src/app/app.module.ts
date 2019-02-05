@@ -13,6 +13,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { BooksModule } from './books/books.module';
 
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ErrorComponent } from './shared/error/error.component';
 import { ErrorInterceptor } from './shared/error/error-interceptor';
 
 import { SearchComponent } from './search/search.component';
@@ -20,7 +21,6 @@ import { HomeComponent } from './home/home.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav/sidenav-list.component';
-import { ErrorComponent } from './shared/error/error.component';
 
 import { DialogComponent } from './shared/dialog/dialog.component';
 

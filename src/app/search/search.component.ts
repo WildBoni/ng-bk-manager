@@ -12,9 +12,9 @@ import { GoogleBookApiService } from '../google-book-api.service';
 import { Book } from '../books/book.model';
 
 import { Subject, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter } from 'rxjs/operators';
 
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-search',
@@ -23,22 +23,21 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 })
 export class SearchComponent implements OnInit, OnDestroy {
   book: any[];
-  books: any[];
+  // books: any[];
   private modelChanged: Subject<string> = new Subject<string>();
   private subscription: Subscription;
   debounceTime = 500;
 
   displayedColumns: string[] = ['image', 'title', 'authors', 'languages',
-    'categories', 'pageCount', 'publisher', 'publisherDate', 'previewLink', 'add'];
+    'categories', 'pageCount', 'publisher', 'publishedDate', 'previewLink',
+    'ean13', 'add'];
   dataSource = new MatTableDataSource<Book>();
 
-  // @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private googleBookApiService : GoogleBookApiService,
     private bookService: BookService,
-    // private localBookService : LocalBookService
   ) { }
 
   ngOnInit() {
@@ -58,20 +57,27 @@ export class SearchComponent implements OnInit, OnDestroy {
   OnSearch(s) {
     this.googleBookApiService.searchBooks(s)
       .subscribe((data) => {
+        let updatedData = data.items.map((item) => {
+          let ean13 = item.volumeInfo.industryIdentifiers
+            .find(f => f.type === "ISBN_13");
+          if(ean13){
+            item.ean13 = ean13.identifier;
+          } else {
+            item.ean13 = "";
+          }
+        });
         this.dataSource.data = data.items;
-        this.books = data.items;
         this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
       });
   }
 
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
-    languages: string[], categories: string[], pageCount: number, 
-    publisher: string, publisherDate: string, previewLink: string) {
-    this.bookService.addBook(title, authors, thumbnail, languages, categories,
-      pageCount, publisher, publisherDate, previewLink);
-    const updatedBooks = this.books.filter(book => book.id !== id);
-    this.books = updatedBooks;
+    languages: string[], categories: string[], pageCount: number,
+    publisher: string, publishedDate: string, previewLink: string, ean13: string) {
+    this.bookService.addBook("search", title, authors, thumbnail, languages, categories,
+      pageCount, publisher, publishedDate, previewLink, ean13);
+    const updatedBooks = this.dataSource.data.filter(book => book.id !== id);
+    this.dataSource.data = updatedBooks;
   }
 
   ngOnDestroy() {

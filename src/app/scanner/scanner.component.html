@@ -11,13 +11,15 @@
     {{ book.volumeInfo.categories }} |
     {{ book.volumeInfo.pageCount }} |
     {{ book.volumeInfo.publisher }} |
-    {{ book.volumeInfo.publisherDate }} |
+    {{ book.volumeInfo.publishedDate }} |
     {{ book.volumeInfo.previewLink }} |
+    {{ book.ean13 }}
     <button (click)="onAddBook(book.id, book.volumeInfo.title,
       book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail,
       book.volumeInfo.language, book.volumeInfo.categories,
       book.volumeInfo.pageCount, book.volumeInfo.publisher,
-      book.volumeInfo.publisherDate, book.volumeInfo.previewLink)">
+      book.volumeInfo.publishedDate, book.volumeInfo.previewLink,
+      book.ean13)">
       ADD
     </button>
   </li>

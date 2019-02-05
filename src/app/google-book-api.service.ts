@@ -23,7 +23,6 @@ export class GoogleBookApiService {
       .pipe(
         map((response: Response) => response.json()),
         map(response => response.items.filter(item => item.volumeInfo.industryIdentifiers.find(f => f.identifier === search)) ),
-        tap(response => console.log(response))
       );
   }
 }

@@ -46,8 +46,11 @@ exports.createBook = (req, res, next) => {
     categories: req.body.categories,
     pageCount: req.body.pageCount,
     publisher: req.body.publisher,
-    publisherDate: req.body.publisherDate,
-    previewLink: req.body.previewLink
+    publishedDate: req.body.publishedDate,
+    previewLink: req.body.previewLink,
+    ean13: req.body.ean13
+    // favourite: req.body.favourite,
+    // toRead: req.body.toRead
   });
   book.save().then(createdBook => {
     res.status(201).json({
@@ -73,8 +76,11 @@ exports.updateBook = (req, res, next) => {
     categories: req.body.categories,
     pageCount: req.body.pageCount,
     publisher: req.body.publisher,
-    publisherDate: req.body.publisherDate,
-    previewLink: req.body.previewLink
+    publishedDate: req.body.publishedDate,
+    previewLink: req.body.previewLink,
+    ean13: req.body.ean13
+    // favourite: req.body.favourite,
+    // toRead: req.body.toRead
   });
   Book.updateOne(
     { _id: req.params.id, creator: req.userData.userId },

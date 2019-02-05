@@ -8,6 +8,9 @@ export interface Book {
   categories?: string[];
   pageCount?: number;
   publisher?: string;
-  publisherDate?: string;
+  publishedDate?: string;
   previewLink?: string;
+  ean13?: string;
+  // favourite?: boolean;
+  // toRead?: boolean;
 }

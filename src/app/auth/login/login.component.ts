@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/Core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 

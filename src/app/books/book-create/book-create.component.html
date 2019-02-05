@@ -86,13 +86,18 @@
     </mat-form-field>
     <mat-form-field>
       <input matInput type="text"
-        formControlName="publisherDate" placeholder="Book publisher date">
+        formControlName="publishedDate" placeholder="Book publisher date">
       <mat-error>Please enter publisher date</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput type="text"
         formControlName="previewLink" placeholder="Book preview link">
       <mat-error>Please enter preview link</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="ean13"
+        formControlName="ean13" placeholder="Book EAN13">
+      <mat-error>Please enter EAN13</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent"
       type="submit" [disabled]="!bookForm.valid">
