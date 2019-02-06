@@ -21,9 +21,9 @@ mongoose.connect(
 
 app.use(bodyParser.json());
 
-// // Create link to Angular build directory
-// var distDir = __dirname + "/dist/";
-// app.use(express.static(distDir));
+// Create link to Angular build directory
+var distDir = __dirname + "/dist/";
+app.use(express.static(distDir));
 
 app.use((req, res, next) => {
   res.setHeader(
