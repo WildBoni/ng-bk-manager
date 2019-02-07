@@ -23,7 +23,7 @@
       </div>
       <div *ngFor="let author of authors.controls; let i = index">
         <mat-form-field>
-          <mat-label>Test</mat-label>
+          <mat-label>Author</mat-label>
           <input class="inputArray" matInput
             [formControlName]="i" placeholder="Book author">
           <!-- <mat-error *ngIf="author.invalid">Please enter a book author</mat-error> -->
@@ -43,7 +43,7 @@
       </div>
       <div *ngFor="let language of languages.controls; let i = index">
         <mat-form-field>
-          <mat-label>Test</mat-label>
+          <mat-label>Language</mat-label>
           <input class="inputArray" matInput
             [formControlName]="i" placeholder="Book language">
           <!-- <mat-error *ngIf="author.invalid">Please enter a book author</mat-error> -->
@@ -63,7 +63,7 @@
       </div>
       <div *ngFor="let category of categories.controls; let i = index">
         <mat-form-field>
-          <mat-label>Test</mat-label>
+          <mat-label>Category</mat-label>
           <input class="inputArray" matInput
             [formControlName]="i" placeholder="Book category">
           <!-- <mat-error *ngIf="author.invalid">Please enter a book author</mat-error> -->

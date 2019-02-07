@@ -1,1 +1,30 @@
-<h2>Welcome</h2>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Welcome to your online library!
+    </mat-card-title>
+    <mat-card-subtitle>
+      This app is still under development, but you can already signup and start
+      creating your library.
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <h3>You have 3 methods for inserting new book:</h3>
+    <ul>
+      <li>Scan the barcode: the app will do the rest!</li>
+      <li>Online search using Google Books</li>
+      <li>Manually insert any book</li>
+    </ul>
+    <h3>Ready? Hit the login or the signup button!</h3>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button
+      [routerLink]="['auth/login']">
+      Login
+    </a>
+    <a mat-button
+      [routerLink]="['auth/signup']">
+      Signup
+    </a>
+  </mat-card-actions>
+</mat-card>

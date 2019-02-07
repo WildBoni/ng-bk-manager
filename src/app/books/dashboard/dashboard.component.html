@@ -1,9 +1,25 @@
 <h2>Dashboard</h2>
-<ul>
-  <li *ngFor="let book of books">
-    <a [routerLink]="['/edit', book.id]">
-      {{book.title}}
-    </a>
-  </li>
-</ul>
-<!-- <app-book-search></app-book-search> -->
+<div *ngIf="books">
+  <mat-card *ngFor="let book of books">
+    <mat-card-header>
+      <mat-card-title>
+        {{ book.title }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ book.authors }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img src="{{ book.thumbnail }}" />
+    <mat-card-content>
+      <p>Language: {{ book.languages }}</p>
+      <p>Categories: {{ book.categories }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button
+        [routerLink]="['/edit', book.id]">
+        Edit
+      </a>
+    </mat-card-actions>
+  </mat-card>
+  <hr>
+</div>
