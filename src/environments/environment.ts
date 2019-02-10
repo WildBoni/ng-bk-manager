@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:3000/api"
+  apiUrl: "https://bk-manager.herokuapp.com/api"
 };
+
+// export const environment = {
+//   production: false,
+//   apiUrl: "http://localhost:3000/api"
+// };
 
 /*
  * In development mode, to ignore zone related error stack frames such as
