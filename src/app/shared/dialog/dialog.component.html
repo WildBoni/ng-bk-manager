@@ -6,4 +6,5 @@
   <button mat-button *ngIf="goToBooks" (click)="navigateTo()">Go to My Books</button>
   <button mat-button *ngIf="addAnotherBook" mat-dialog-close color="warn">Add another book</button>
   <button mat-button *ngIf="scanAgain" (click)="scanAnother()" color="warn">Scan another book</button>
+  <button mat-button *ngIf="goToLogin" (click)="navigateToLogin()" color="warn">Go to Login</button>
 </mat-dialog-actions>

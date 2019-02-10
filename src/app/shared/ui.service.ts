@@ -35,6 +35,10 @@ export class UIService {
           this.router.navigate(["/books"]);
           break;
         }
+        case "Login": {
+          this.router.navigate(["/auth/login"]);
+          break;
+        }
         default: {
           console.log("default");
           break;
@@ -45,6 +49,20 @@ export class UIService {
     // snackBarRef.afterDismissed().subscribe(() => {
     //   console.log('The snack-bar was dismissed');
     // });
+  }
+
+  showGoToLoginDialog(
+    title: string,
+    description: string,
+    goToLogin: boolean
+  ) {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        data: {
+          title: title,
+          description: description,
+          goToLogin: goToLogin
+        }
+      })
   }
 
   showDialog(

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
+import { UIService } from '../shared/ui.service';
+
 import { environment } from '../../environments/environment';
 import { AuthData } from './auth-data.model';
 
@@ -22,7 +24,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private uiService: UIService
   ) {}
 
   getToken() {
@@ -45,7 +48,8 @@ export class AuthService {
     const authData: AuthData = {email: email, password: password};
     this.http.post(BACKEND_URL + "signup", authData)
       .subscribe(() => {
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this.uiService.showGoToLoginDialog('Signup completed!', ' Now you can login', true);
       }, error => {
         this.authStatusListener.next(false);
       });
