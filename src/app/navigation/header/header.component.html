@@ -3,7 +3,12 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>
-    <a routerLink='/'>
+    <a *ngIf="!userIsAuthenticated"
+      routerLink='/'>
+      BkManager
+    </a>
+    <a *ngIf="userIsAuthenticated"
+      routerLink='/dashboard'>
       BkManager
     </a>
   </span>

@@ -1,3 +1,18 @@
 mat-card {
   margin: 50px 0;
 }
+mat-card-content {
+  display: flex;
+}
+
+mat-card-content img {
+  margin-right: 10px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button-nav {
+  margin: 10px 10px;
+}

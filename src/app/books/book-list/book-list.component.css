@@ -3,9 +3,30 @@ mat-spinner {
 }
 
 mat-form-field {
-  width: 100%;
+  width: calc(100% - 20px);
+  margin: 10px 10px;
+}
+
+mat-table {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+mat-table td {
+  vertical-align: middle;
+}
+
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  padding-left: 10px;
+}
+
+tr.mat-header-row {
+  height: 30px;
 }
 
 img {
+  margin: 10px 6px 10px 0;
   max-height: 80px;
 }

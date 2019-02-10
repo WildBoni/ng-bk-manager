@@ -2,15 +2,15 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
-  apiUrl: "https://bk-manager.herokuapp.com/api"
-};
-
 // export const environment = {
 //   production: false,
-//   apiUrl: "http://localhost:3000/api"
+//   apiUrl: "https://bk-manager.herokuapp.com/api"
 // };
+
+export const environment = {
+  production: false,
+  apiUrl: "http://localhost:3000/api"
+};
 
 /*
  * In development mode, to ignore zone related error stack frames such as

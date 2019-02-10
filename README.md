@@ -1,4 +1,4 @@
-# Angular Book Manager (BKMNGR) - UNDER DEVELOPMENT
+# Angular Book Manager (NGBKMNGR) - UNDER DEVELOPMENT
 
 Angular Book Manager is an open-source online database where you can store your books.
 
@@ -8,14 +8,15 @@ Angular Book Manager is an open-source online database where you can store your 
 
 ## Features
 
-These are the main features (please note that BKMNGR is still under development):
+These are the main features (please note that NGBKMNGR is still under development):
 
-- [x] Automatically add books by scanning the barcode!
+- [x] Automatically add books by scanning their barcode!
 - [x] Add books searching in Google Books API
 - [x] Responsive layout: access your library database from mobile
 - [x] Edit/Update your library
 - [x] Advanced search filters
-- [x] Login / Subscribe with different accounts (JWT security)
+- [x] Login / Signup with different accounts (JWT)
+- [] Login / Signup with Facebook / Google accounts
 - [ ] Add books to wishlist
 - [ ] Add books to favourites
 - [ ] Keep track of books you lend
@@ -24,10 +25,10 @@ These are the main features (please note that BKMNGR is still under development)
 
 ## Installation
 
-* First of all, make sure you have Node and npm installed!
+* First of all, make sure you have Node and npm installed
 * Create a new MongoDb (you can use Atlas)
 * Run npm install in your project folder and wait for the installation process to complete
-* Remember to update envirnoment and nodemon variables with your correct configuration!
+* Remember to update environment and nodemon variables with your correct configuration!
 * Run ng serve --open for opening a browser window on localhost
 * Run npm run start:server for getting the backend up and running
 
@@ -46,6 +47,7 @@ Book Manager is powered by:
 - Node
 - Mongoose
 - Express
+- JWT
 
 * Frontend
 - Angular

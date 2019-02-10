@@ -2,18 +2,18 @@
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSaveBook(myForm)" #myForm= "ngForm" [formGroup]="bookForm"
     *ngIf="!isLoading">
-    <mat-form-field>
+    <mat-form-field class="full-width">
       <input matInput required type="text"
         formControlName="title" placeholder="Book title">
       <mat-error>Please enter a book title</mat-error>
     </mat-form-field>
     <hr>
+    <img [src]="bookImg" alt="">
     <mat-form-field>
       <input matInput
       type="text" formControlName="thumbnail" placeholder="Image url">
       <!-- <mat-error *ngIf="title.invalid">Please enter a book title</mat-error> -->
     </mat-form-field>
-    <img [src]="thumbnail" alt="">
     <div formArrayName="authors">
       <div>
         <h3>Authors</h3>
@@ -21,7 +21,8 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let author of authors.controls; let i = index">
+      <div *ngFor="let author of authors.controls; let i = index"
+        class="field-container">
         <mat-form-field>
           <mat-label>Author</mat-label>
           <input class="inputArray" matInput
@@ -41,7 +42,8 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let language of languages.controls; let i = index">
+      <div *ngFor="let language of languages.controls; let i = index"
+        class="field-container">
         <mat-form-field>
           <mat-label>Language</mat-label>
           <input class="inputArray" matInput
@@ -61,7 +63,8 @@
           <mat-icon>add</mat-icon>
         </button>
       </div>
-      <div *ngFor="let category of categories.controls; let i = index">
+      <div *ngFor="let category of categories.controls; let i = index"
+        class="field-container">
         <mat-form-field>
           <mat-label>Category</mat-label>
           <input class="inputArray" matInput
@@ -74,34 +77,36 @@
         </button>
       </div>
     </div>
-    <mat-form-field>
+    <mat-form-field class="half-width">
       <input matInput type="number"
         formControlName="pageCount" placeholder="Book page count">
       <mat-error>Please enter number of pages</mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="half-width">
       <input matInput type="text"
         formControlName="publisher" placeholder="Book publisher">
       <mat-error>Please enter publisher name</mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="half-width">
       <input matInput type="text"
         formControlName="publishedDate" placeholder="Book publisher date">
       <mat-error>Please enter publisher date</mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="half-width">
+      <input matInput type="ean13"
+      formControlName="ean13" placeholder="Book EAN13">
+      <mat-error>Please enter EAN13</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
       <input matInput type="text"
         formControlName="previewLink" placeholder="Book preview link">
       <mat-error>Please enter preview link</mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput type="ean13"
-        formControlName="ean13" placeholder="Book EAN13">
-      <mat-error>Please enter EAN13</mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="accent"
+    <div class="button-container">
+      <button mat-raised-button color="accent"
       type="submit" [disabled]="!bookForm.valid">
       Save book
     </button>
+    </div>
   </form>
 </mat-card>

@@ -1,10 +1,24 @@
 mat-spinner {
   margin: auto;
 }
-/* .inputArray {
-  margin-left: 150px;
+
+.button-container {
+  text-align: center;
 }
-.close {
-  position: absolute;
-  right: 0;
-} */
+
+.field-container mat-form-field {
+  margin-right: 10px;
+}
+
+img {
+  margin-right: 6px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: calc(50% - 20px);
+  margin-right: 10px;
+}
