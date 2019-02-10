@@ -57,6 +57,13 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     this.googleBookApiService.searchBooksByEan(ean)
       .subscribe(result => {
         let updatedData = result.map((item) => {
+          let thumbnail = item.volumeInfo.imageLinks.thumbnail;
+          if(thumbnail){
+            thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(5);
+            item.thumbnail = thumbnail;
+          } else {
+            item.thumbnail = "none";
+          }
           let ean13 = item.volumeInfo.industryIdentifiers
             .find(f => f.type === "ISBN_13");
           if(ean13){

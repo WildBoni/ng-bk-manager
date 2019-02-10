@@ -58,6 +58,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.googleBookApiService.searchBooks(s)
       .subscribe((data) => {
         let updatedData = data.items.map((item) => {
+          let thumbnail = item.volumeInfo.imageLinks.thumbnail;
+          if(thumbnail){
+            thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
+            item.thumbnail = thumbnail;
+            console.log(thumbnail);
+          } else {
+            item.thumbnail = "none";
+          }
           let ean13 = item.volumeInfo.industryIdentifiers
             .find(f => f.type === "ISBN_13");
           if(ean13){
@@ -65,6 +73,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           } else {
             item.ean13 = "";
           }
+          console.log(item);
         });
         this.dataSource.data = data.items;
         this.dataSource.paginator = this.paginator;
