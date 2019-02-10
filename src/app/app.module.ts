@@ -22,6 +22,8 @@ import { HomeComponent } from './home/home.component';
 import { ScannerComponent } from './online-search/scanner/scanner.component';
 
 import { DialogComponent } from './shared/dialog/dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     AngularMaterialModule,
     // FlexLayoutModule,
     BooksModule,
-    NavigationModule
+    NavigationModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
