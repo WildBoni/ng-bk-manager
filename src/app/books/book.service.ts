@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,7 +23,8 @@ export class BookService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private uiService: UIService
+    private uiService: UIService,
+    private location: Location
   ) { }
 
   getBooks() {
@@ -168,6 +170,10 @@ export class BookService {
   deleteBook(bookId: string) {
     return this.http
       .delete(BACKEND_URL + bookId);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

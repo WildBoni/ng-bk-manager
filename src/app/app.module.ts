@@ -11,19 +11,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularMaterialModule } from './angular-material.module';
 import { BooksModule } from './books/books.module';
+import { NavigationModule } from './navigation/navigation.module';
 
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorComponent } from './shared/error/error.component';
 import { ErrorInterceptor } from './shared/error/error-interceptor';
 
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './online-search/search/search.component';
 import { HomeComponent } from './home/home.component';
-import { ScannerComponent } from './scanner/scanner.component';
-import { HeaderComponent } from './header/header.component';
-import { SidenavListComponent } from './sidenav/sidenav-list.component';
+import { ScannerComponent } from './online-search/scanner/scanner.component';
 
 import { DialogComponent } from './shared/dialog/dialog.component';
-
 
 @NgModule({
   declarations: [
@@ -31,8 +29,6 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     SearchComponent,
     HomeComponent,
     ScannerComponent,
-    HeaderComponent,
-    SidenavListComponent,
     ErrorComponent,
     DialogComponent
   ],
@@ -45,7 +41,8 @@ import { DialogComponent } from './shared/dialog/dialog.component';
     HttpClientModule,
     AngularMaterialModule,
     // FlexLayoutModule,
-    BooksModule
+    BooksModule,
+    NavigationModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

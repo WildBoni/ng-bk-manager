@@ -1,8 +1,8 @@
 import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { BarecodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 
-import { BookService } from '../books/book.service';
-import { UIService } from '../shared/ui.service';
+import { BookService } from '../../books/book.service';
+import { UIService } from '../../shared/ui.service';
 import { GoogleBookApiService } from '../google-book-api.service';
 // import { Book } from '../book';
 

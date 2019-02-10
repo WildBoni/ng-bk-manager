@@ -1,25 +1,26 @@
 <h2>Dashboard</h2>
 <div *ngIf="books">
-  <mat-card *ngFor="let book of books">
-    <mat-card-header>
-      <mat-card-title>
-        {{ book.title }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ book.authors }}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <img src="{{ book.thumbnail }}" />
-    <mat-card-content>
-      <p>Language: {{ book.languages }}</p>
-      <p>Categories: {{ book.categories }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-button
-        [routerLink]="['/edit', book.id]">
-        Edit
-      </a>
-    </mat-card-actions>
-  </mat-card>
-  <hr>
+  <div *ngFor="let book of books">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ book.title }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ book.authors }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img src="{{ book.thumbnail }}" />
+      <mat-card-content>
+        <p>Language: {{ book.languages }}</p>
+        <p>Categories: {{ book.categories }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-raised-button color="primary"
+          [routerLink]="['/edit', book.id]">
+          Edit
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

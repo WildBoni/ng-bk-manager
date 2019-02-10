@@ -8,6 +8,10 @@ a:active {
   color: lightgray;
 }
 
+mat-nav-list {
+  margin-left: 8px;
+}
+
 .nav-caption {
   display: inline-block;
   padding-left: 6px;

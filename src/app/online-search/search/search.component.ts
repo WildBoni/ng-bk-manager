@@ -5,11 +5,11 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { BookService } from '../books/book.service';
+import { BookService } from '../../books/book.service';
 import { GoogleBookApiService } from '../google-book-api.service';
 // import { LocalBookService } from '../local-book.service';
 
-import { Book } from '../books/book.model';
+import { Book } from '../../books/book.model';
 
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
