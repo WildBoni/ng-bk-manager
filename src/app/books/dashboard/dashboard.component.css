@@ -9,6 +9,10 @@ mat-card-content img {
   margin-right: 10px;
 }
 
+.dashboard-info {
+  text-align: center;
+}
+
 .button-container {
   text-align: center;
 }

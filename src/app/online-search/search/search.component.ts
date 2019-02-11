@@ -62,7 +62,6 @@ export class SearchComponent implements OnInit, OnDestroy {
           if(thumbnail){
             thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
             item.thumbnail = thumbnail;
-            console.log(thumbnail);
           } else {
             item.thumbnail = "none";
           }
@@ -73,7 +72,6 @@ export class SearchComponent implements OnInit, OnDestroy {
           } else {
             item.ean13 = "";
           }
-          console.log(item);
         });
         this.dataSource.data = data.items;
         this.dataSource.paginator = this.paginator;

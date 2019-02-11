@@ -30,3 +30,15 @@ img {
   margin: 10px 6px 10px 0;
   max-height: 80px;
 }
+
+.dashboard-info {
+  text-align: center;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button-nav {
+  margin: 10px 10px;
+}

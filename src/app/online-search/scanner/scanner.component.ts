@@ -59,7 +59,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
         let updatedData = result.map((item) => {
           let thumbnail = item.volumeInfo.imageLinks.thumbnail;
           if(thumbnail){
-            thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(5);
+            thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
             item.thumbnail = thumbnail;
           } else {
             item.thumbnail = "none";

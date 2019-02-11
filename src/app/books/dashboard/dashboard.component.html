@@ -1,5 +1,8 @@
 <h2>Dashboard</h2>
-<div class="button-container">
+<div *ngIf="books.length === 0" class="dashboard-info">
+  <h3>Your library is empty... It's time to add your books!</h3>
+</div>
+<div class="button-container" *ngIf="books.length > 0">
   <a mat-raised-button color="primary" class="button-nav"
     [routerLink]="['/books']">
     Your Library
@@ -19,7 +22,6 @@
     Insert
   </a>
 </div>
-
 <div *ngIf="books">
   <div *ngFor="let book of books">
     <mat-card>
