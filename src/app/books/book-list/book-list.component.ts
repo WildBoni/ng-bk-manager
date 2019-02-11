@@ -21,6 +21,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 })
 export class BookListComponent implements OnInit, OnDestroy {
   // books: Book[] = [];
+  emptyLibrary: boolean;
   isLoading = false;
   userIsAuthenticated = false;
   userId: string;
@@ -60,6 +61,11 @@ export class BookListComponent implements OnInit, OnDestroy {
       .subscribe((books: Book[]) => {
           this.isLoading = false;
           this.dataSource.data = books;
+          if(books.length > 0) {
+            this.emptyLibrary = false;
+          } else {
+            this.emptyLibrary = true;
+          }
         });
     this.bookService.getBooks();
     this.userId = this.authService.getUserId();
