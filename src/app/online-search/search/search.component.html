@@ -5,6 +5,21 @@
   <button mat-raised-button color="accent" type="button" (click)="OnSearch(search.value)">Search</button>
 </mat-card>
 <mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0">
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef>Add</th>
+    <td mat-cell *matCellDef="let book">
+      <button
+        mat-raised-button color="accent"
+        (click)="onAddBook(book.id, book.volumeInfo.title,
+          book.volumeInfo.authors, book.thumbnail,
+          book.volumeInfo.language, book.volumeInfo.categories,
+          book.volumeInfo.pageCount, book.volumeInfo.publisher,
+          book.volumeInfo.publishedDate, book.volumeInfo.previewLink,
+          book.ean13)"
+        type="button"
+      >ADD</button>
+    </td>
+  </ng-container>
   <ng-container matColumnDef="image">
     <th mat-header-cell *matHeaderCellDef>Image</th>
     <td mat-cell *matCellDef="let book">
@@ -27,7 +42,7 @@
     <th mat-header-cell *matHeaderCellDef>Categories</th>
     <td mat-cell *matCellDef="let book">{{ book.volumeInfo.categories }}</td>
   </ng-container>
-  <ng-container matColumnDef="pageCount">
+  <!-- <ng-container matColumnDef="pageCount">
     <th mat-header-cell *matHeaderCellDef>Page count</th>
     <td mat-cell *matCellDef="let book">{{ book.volumeInfo.pageCount }}</td>
   </ng-container>
@@ -46,22 +61,7 @@
   <ng-container matColumnDef="ean13">
     <th mat-header-cell *matHeaderCellDef>Ean13</th>
     <td mat-cell *matCellDef="let book">{{ book.ean13 }}</td>
-  </ng-container>
-  <ng-container matColumnDef="add">
-    <th mat-header-cell *matHeaderCellDef>Add</th>
-    <td mat-cell *matCellDef="let book">
-      <button
-        mat-raised-button color="accent"
-        (click)="onAddBook(book.id, book.volumeInfo.title,
-          book.volumeInfo.authors, book.thumbnail,
-          book.volumeInfo.language, book.volumeInfo.categories,
-          book.volumeInfo.pageCount, book.volumeInfo.publisher,
-          book.volumeInfo.publishedDate, book.volumeInfo.previewLink,
-          book.ean13)"
-        type="button"
-      >ADD</button>
-    </td>
-  </ng-container>
+  </ng-container> -->
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-header-row *matRowDef="let row; columns: displayedColumns"></tr>

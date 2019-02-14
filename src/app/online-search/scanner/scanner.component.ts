@@ -54,26 +54,42 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
   }
 
   searchResult(ean) {
-    this.googleBookApiService.searchBooksByEan(ean)
+    if(ean != "") {
+      this.googleBookApiService.searchBooksByEan(ean)
       .subscribe(result => {
-        let updatedData = result.map((item) => {
-          let thumbnail = item.volumeInfo.imageLinks.thumbnail;
-          if(thumbnail){
-            thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
-            item.thumbnail = thumbnail;
+        result.map((item) => {
+          if(item.volumeInfo.imageLinks) {
+            if(item.volumeInfo.imageLinks.thumbnail) {
+              let thumbnail = item.volumeInfo.imageLinks.thumbnail;
+              thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
+              item.thumbnail = thumbnail;
+            } else {
+              item.thumbnail = "none";
+            }
           } else {
             item.thumbnail = "none";
           }
-          let ean13 = item.volumeInfo.industryIdentifiers
-            .find(f => f.type === "ISBN_13");
-          if(ean13){
-            item.ean13 = ean13.identifier;
+          if(item.volumeInfo.industryIdentifiers) {
+            if(item.volumeInfo.industryIdentifiers.type) {
+              let ean13 = item.volumeInfo.industryIdentifiers
+              .find(f => f.type === "ISBN_13");
+              if(ean13){
+                item.ean13 = ean13.identifier;
+              } else {
+                item.ean13 = "";
+              }
+            } else {
+              item.ean13 = "";
+            }
           } else {
             item.ean13 = "";
           }
         });
         this.books = result;
-      })
+      });
+    } else {
+      this.books = [];
+    }
   }
 
   ngOnDestroy() {

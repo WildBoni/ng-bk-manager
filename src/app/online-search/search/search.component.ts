@@ -28,9 +28,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   debounceTime = 500;
 
-  displayedColumns: string[] = ['image', 'title', 'authors', 'languages',
-    'categories', 'pageCount', 'publisher', 'publishedDate', 'previewLink',
-    'ean13', 'add'];
+  displayedColumns: string[] = ['add', 'image', 'title', 'authors', 'languages',
+    'categories'];
   dataSource = new MatTableDataSource<Book>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -55,20 +54,33 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   OnSearch(s) {
+    if(s != "") {
     this.googleBookApiService.searchBooks(s)
       .subscribe((data) => {
-        let updatedData = data.items.map((item) => {
-          let thumbnail = item.volumeInfo.imageLinks.thumbnail;
-          if(thumbnail){
-            thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
-            item.thumbnail = thumbnail;
+        data.items.map((item) => {
+          if(item.volumeInfo.imageLinks) {
+            if(item.volumeInfo.imageLinks.thumbnail) {
+              let thumbnail = item.volumeInfo.imageLinks.thumbnail;
+              thumbnail = thumbnail.slice(0, 4) + "s" + thumbnail.slice(4);
+              item.thumbnail = thumbnail;
+            } else {
+              item.thumbnail = "none";
+            }
           } else {
             item.thumbnail = "none";
           }
-          let ean13 = item.volumeInfo.industryIdentifiers
-            .find(f => f.type === "ISBN_13");
-          if(ean13){
-            item.ean13 = ean13.identifier;
+          if(item.volumeInfo.industryIdentifiers) {
+            if(item.volumeInfo.industryIdentifiers.type) {
+              let ean13 = item.volumeInfo.industryIdentifiers
+              .find(f => f.type === "ISBN_13");
+              if(ean13){
+                item.ean13 = ean13.identifier;
+              } else {
+                item.ean13 = "";
+              }
+            } else {
+              item.ean13 = "";
+            }
           } else {
             item.ean13 = "";
           }
@@ -76,6 +88,9 @@ export class SearchComponent implements OnInit, OnDestroy {
         this.dataSource.data = data.items;
         this.dataSource.paginator = this.paginator;
       });
+    } else {
+      this.dataSource.data = [];
+    }
   }
 
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
