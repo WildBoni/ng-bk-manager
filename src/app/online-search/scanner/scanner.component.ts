@@ -78,7 +78,9 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.BarecodeScanner.stop();
-    this.scanSub.unsubscribe();
+    if(this.scanSub) {
+      this.scanSub.unsubscribe();
+    }
   }
 
 }
