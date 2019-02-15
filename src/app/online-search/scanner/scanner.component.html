@@ -1,7 +1,8 @@
 <barcode-scanner-livestream type="ean" (valueChanges)="onValueChanges($event)"></barcode-scanner-livestream>
-<!-- <div [hidden]="!barcodeValue">
-    {{barcodeValue}}
-</div> -->
+<div [hidden]="!barcodeValue" class="scan-value">
+    <h3>The scanner read: <strong>{{barcodeValue}}</strong></h3>
+    <button mat-raised-button color="accent" (click)="scanAgain()">Scan again</button>
+</div>
 <div *ngIf="books">
   <mat-card *ngFor="let book of books">
     <mat-card-header>

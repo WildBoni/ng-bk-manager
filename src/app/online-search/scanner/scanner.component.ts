@@ -37,6 +37,12 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     this.searchResult(this.barcodeValue);
   }
 
+  scanAgain() {
+    this.BarecodeScanner.start();
+    this.books = [];
+    this.barcodeValue = "";
+  }
+
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
     languages: string[], categories: string[], pageCount: number,
     publisher: string, publishedDate: string, previewLink: string, ean13: string) {
@@ -48,8 +54,8 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
         });
     this.bookService.addBook("scan", title, authors, thumbnail, languages, categories,
       pageCount, publisher, publishedDate, previewLink, ean13);
-    const updatedBooks = this.books.filter(book => book.id !== id);
-    this.books = updatedBooks;
+    // const updatedBooks = this.books.filter(book => book.id !== id);
+    // this.books = updatedBooks;
 
   }
 

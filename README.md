@@ -16,7 +16,8 @@ These are the main features (please note that NGBKMNGR is still under developmen
 - [x] Edit/Update your library
 - [x] Advanced search filters
 - [x] Login / Signup with different accounts (JWT)
-- [] Login / Signup with Facebook / Google accounts
+- [x] PWA behaviour: visit the website and add it to your home screen
+- [ ] Login / Signup with Facebook / Google accounts
 - [ ] Add books to wishlist
 - [ ] Add books to favourites
 - [ ] Keep track of books you lend
@@ -36,27 +37,27 @@ These are the main features (please note that NGBKMNGR is still under developmen
 
 These features may be implemented later on...
 
-* PWA app with offline capabilities
+* PWA app with offline capabilities (indexed database)
 
 ## Sources
 
 Book Manager is powered by:
 
 * Backend
-- MongoDb
-- Node
-- Mongoose
-- Express
-- JWT
+  - MongoDb
+  - Node
+  - Mongoose
+  - Express
+  - JWT
 
 * Frontend
-- Angular
-- RxJs
-- DataTables
-- Quagga (ngx barcode scanner)
+  - Angular
+  - RxJs
+  - DataTables
+  - Quagga (ngx barcode scanner)
 
 * API
-- Google Books
+  - Google Books
 
 ## Help me!
 
