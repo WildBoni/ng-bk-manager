@@ -25,6 +25,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   languagesData = [];
   categoriesData = [];
   bookImg = '';
+  bookPreviewLink = '';
   isLoading = false;
   private mode = 'create';
   private bookId: string;
@@ -152,6 +153,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
           this.categoriesData = bookData.categories;
           this.getCategories();
           this.bookImg = bookData.thumbnail;
+          this.bookPreviewLink = bookData.previewLink;
         });
       } else {
         this.mode = 'create';

@@ -2,14 +2,14 @@
   <mat-form-field>
     <input matInput type="search" (keyup)="inputChanged(search.value)" placeholder="Search book" #search id="search">
   </mat-form-field>
-  <button mat-raised-button color="accent" type="button" (click)="OnSearch(search.value)">Search</button>
+  <button mat-flat-button color="accent" type="button" (click)="OnSearch(search.value)">Search</button>
 </mat-card>
 <mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0">
   <ng-container matColumnDef="add">
     <th mat-header-cell *matHeaderCellDef>Add</th>
     <td mat-cell *matCellDef="let book">
       <button
-        mat-raised-button color="accent"
+        mat-flat-button color="accent"
         (click)="onAddBook(book.id, book.volumeInfo.title,
           book.volumeInfo.authors, book.thumbnail,
           book.volumeInfo.language, book.volumeInfo.categories,

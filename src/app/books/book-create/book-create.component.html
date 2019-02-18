@@ -102,8 +102,14 @@
         formControlName="previewLink" placeholder="Book preview link">
       <mat-error>Please enter preview link</mat-error>
     </mat-form-field>
+    <div>
+      <a [href]="bookPreviewLink" target="_blank"
+      mat-flat-button color="primary">
+      <i class="material-icons">picture_as_pdf</i> Preview
+    </a>
+    </div>
     <div class="button-container">
-      <button mat-raised-button color="accent"
+      <button mat-flat-button color="accent"
       type="submit" [disabled]="!bookForm.valid">
       Save book
     </button>

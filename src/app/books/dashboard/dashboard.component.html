@@ -3,21 +3,21 @@
   <h3>Your library is empty... It's time to add your books!</h3>
 </div>
 <div class="button-container" *ngIf="books.length > 0">
-  <a mat-raised-button color="primary" class="button-nav"
+  <a mat-flat-button color="primary" class="button-nav"
     [routerLink]="['/books']">
     Your Library
   </a>
 </div>
 <div class="button-container">
-  <a mat-raised-button color="accent" class="button-nav"
+  <a mat-flat-button color="accent" class="button-nav"
     [routerLink]="['/scanner']">
     Scan
   </a>
-  <a mat-raised-button color="basic" class="button-nav"
+  <a mat-flat-button color="basic" class="button-nav"
     [routerLink]="['/search']">
     Search
   </a>
-  <a mat-raised-button color="basic" class="button-nav"
+  <a mat-flat-button color="basic" class="button-nav"
     [routerLink]="['/insert']">
     Insert
   </a>
@@ -38,7 +38,7 @@
         <div>
           <p>Language: {{ book.languages }}</p>
           <p>Categories: {{ book.categories }}</p>
-          <a mat-raised-button color="primary"
+          <a mat-flat-button color="primary"
             [routerLink]="['/edit', book.id]">
             Edit
           </a>
