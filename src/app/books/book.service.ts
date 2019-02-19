@@ -46,7 +46,8 @@ export class BookService {
             publisher: book.publisher,
             publishedDate: book.publishedDate,
             previewLink: book.previewLink,
-            ean13: book.ean13
+            ean13: book.ean13,
+            favourite: book.favourite
           };
         });
       }))
@@ -74,7 +75,8 @@ export class BookService {
       publisher: string,
       publishedDate: string,
       previewLink: string,
-      ean13: string
+      ean13: string,
+      favourite: boolean
     }>(
       BACKEND_URL + id
     );
@@ -83,7 +85,7 @@ export class BookService {
   addBook(mode: string, title: string, authors: string[], thumbnail: string,
     languages: string[], categories: string[], pageCount: number,
     publisher: string, publishedDate: string, previewLink: string,
-    ean13: string) {
+    ean13: string, favourite: boolean) {
     const book: Book = {
       id: null,
       title: title,
@@ -96,7 +98,8 @@ export class BookService {
       publisher: publisher,
       publishedDate: publishedDate,
       previewLink: previewLink,
-      ean13: ean13
+      ean13: ean13,
+      favourite: favourite
     };
     switch (mode)
     {
@@ -139,7 +142,7 @@ export class BookService {
   updateBook(id: string, title: string, authors: string[],
     thumbnail: string, languages: string[], categories: string[],
     pageCount: number, publisher: string, publishedDate: string,
-    previewLink: string, ean13: string) {
+    previewLink: string, ean13: string, favourite: boolean) {
     const book: Book = {
       id: id,
       title: title,
@@ -152,7 +155,8 @@ export class BookService {
       publisher: publisher,
       publishedDate: publishedDate,
       previewLink: previewLink,
-      ean13: ean13
+      ean13: ean13,
+      favourite: favourite
     };
     this.http
       .put(BACKEND_URL + id, book)
@@ -164,6 +168,23 @@ export class BookService {
           this.booksUpdated.next([...this.books]);
           this.uiService.showSnackbar('Book edited succesfully!', 'Back to Books', 3000);
           // this.router.navigate(["/"]);
+        });
+  }
+
+  toggleFav(id, fav) {
+    const payload: any = {
+      favourite: fav,
+      id: id
+    };
+    this.http
+      .put(BACKEND_URL + "fav/" + id, payload)
+        .subscribe(response => {
+          const updatedBooks = [...this.books];
+          const oldBookIndex = updatedBooks.findIndex(book => book.id === payload.id);
+          updatedBooks[oldBookIndex].favourite = response.favourite;
+          this.books = updatedBooks;
+          this.booksUpdated.next([...this.books]);
+          this.uiService.showSnackbar('Fav toggled!', '', 500);
         });
   }
 

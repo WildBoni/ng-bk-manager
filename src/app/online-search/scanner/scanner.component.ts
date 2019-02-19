@@ -45,7 +45,8 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
 
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
     languages: string[], categories: string[], pageCount: number,
-    publisher: string, publishedDate: string, previewLink: string, ean13: string) {
+    publisher: string, publishedDate: string, previewLink: string, ean13: string,
+    favourite: boolean = false) {
     this.scanSub = this.uiService.getScanStatusListener()
       .subscribe((status: boolean) => {
           if(status === true) {
@@ -53,7 +54,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
           }
         });
     this.bookService.addBook("scan", title, authors, thumbnail, languages, categories,
-      pageCount, publisher, publishedDate, previewLink, ean13);
+      pageCount, publisher, publishedDate, previewLink, ean13, favourite);
     // const updatedBooks = this.books.filter(book => book.id !== id);
     // this.books = updatedBooks;
 
@@ -78,7 +79,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
           if(item.volumeInfo.industryIdentifiers) {
             if(item.volumeInfo.industryIdentifiers.type) {
               let ean13 = item.volumeInfo.industryIdentifiers
-              .find(f => f.type === "ISBN_13");
+              .find(f => f.type == "ISBN_13");
               if(ean13){
                 item.ean13 = ean13.identifier;
               } else {

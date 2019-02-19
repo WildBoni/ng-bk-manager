@@ -12,6 +12,8 @@ router.post("", checkAuth, BookController.createBook);
 
 router.put("/:id", checkAuth, BookController.updateBook);
 
+router.put("/fav/:id", checkAuth, BookController.updateFav);
+
 router.delete("/:id", checkAuth, BookController.deleteBook);
 
 module.exports = router;

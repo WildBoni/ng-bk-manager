@@ -25,6 +25,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   languagesData = [];
   categoriesData = [];
   bookImg = '';
+  bookFav: boolean = false;
   bookPreviewLink = '';
   isLoading = false;
   private mode = 'create';
@@ -154,6 +155,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
           this.getCategories();
           this.bookImg = bookData.thumbnail;
           this.bookPreviewLink = bookData.previewLink;
+          this.bookFav = bookData.favourite;
         });
       } else {
         this.mode = 'create';
@@ -179,7 +181,8 @@ export class BookCreateComponent implements OnInit, OnDestroy {
         this.bookForm.value.publisher,
         this.bookForm.value.publishedDate,
         this.bookForm.value.previewLink,
-        this.bookForm.value.ean13
+        this.bookForm.value.ean13,
+        this.bookFav
       );
     form.resetForm();
     } else {
@@ -194,7 +197,8 @@ export class BookCreateComponent implements OnInit, OnDestroy {
         this.bookForm.value.publisher,
         this.bookForm.value.publishedDate,
         this.bookForm.value.previewLink,
-        this.bookForm.value.ean13
+        this.bookForm.value.ean13,
+        this.bookFav
       );
     }
     this.isLoading = false;

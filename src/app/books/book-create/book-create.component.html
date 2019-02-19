@@ -2,6 +2,12 @@
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSaveBook(myForm)" #myForm= "ngForm" [formGroup]="bookForm"
     *ngIf="!isLoading">
+    <!-- <mat-form-field class="full-width">
+      <button mat-button color="warn" (click)="onToggleFav(book.id)">
+        <i *ngIf="!favourite" class="material-icons">favorite_border</i>
+        <i *ngIf="favourite" class="material-icons">favorite</i>
+      </button>
+    </mat-form-field> -->
     <mat-form-field class="full-width">
       <input matInput required type="text"
         formControlName="title" placeholder="Book title">

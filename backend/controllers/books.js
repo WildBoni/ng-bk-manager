@@ -48,8 +48,8 @@ exports.createBook = (req, res, next) => {
     publisher: req.body.publisher,
     publishedDate: req.body.publishedDate,
     previewLink: req.body.previewLink,
-    ean13: req.body.ean13
-    // favourite: req.body.favourite,
+    ean13: req.body.ean13,
+    favourite: req.body.favourite
     // toRead: req.body.toRead
   });
   book.save().then(createdBook => {
@@ -78,8 +78,8 @@ exports.updateBook = (req, res, next) => {
     publisher: req.body.publisher,
     publishedDate: req.body.publishedDate,
     previewLink: req.body.previewLink,
-    ean13: req.body.ean13
-    // favourite: req.body.favourite,
+    ean13: req.body.ean13,
+    favourite: req.body.favourite
     // toRead: req.body.toRead
   });
   Book.updateOne(
@@ -97,6 +97,31 @@ exports.updateBook = (req, res, next) => {
       message: "Couldn't update book!"
     });
   });;
+}
+
+exports.updateFav = (req, res, next) => {
+  const fav = req.body.favourite;
+  Book.findOneAndUpdate(
+    { _id: req.params.id, creator: req.userData.userId },
+    { favourite: fav },
+    { new: true }
+  ).then(result => {
+    if (result) {
+      console.log(result);
+      res.status(200).json({
+        message: "Fav successfull!",
+        favourite: result.favourite,
+        id: result._id
+      });
+    } else {
+      res.status(401).json({ message: "Not Authorized!"});
+    }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Couldn't update fav!"
+    });
+  });
 }
 
 exports.deleteBook = (req, res, next) => {

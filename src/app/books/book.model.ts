@@ -11,6 +11,6 @@ export interface Book {
   publishedDate?: string;
   previewLink?: string;
   ean13?: string;
-  // favourite?: boolean;
+  favourite?: boolean;
   // toRead?: boolean;
 }

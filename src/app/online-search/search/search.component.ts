@@ -95,9 +95,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
     languages: string[], categories: string[], pageCount: number,
-    publisher: string, publishedDate: string, previewLink: string, ean13: string) {
+    publisher: string, publishedDate: string, previewLink: string, ean13: string,
+    favourite: boolean = false) {
     this.bookService.addBook("search", title, authors, thumbnail, languages, categories,
-      pageCount, publisher, publishedDate, previewLink, ean13);
+      pageCount, publisher, publishedDate, previewLink, ean13, favourite);
     const updatedBooks = this.dataSource.data.filter(book => book.id !== id);
     this.dataSource.data = updatedBooks;
   }

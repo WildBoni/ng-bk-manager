@@ -29,7 +29,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription
 
 
-  displayedColumns: string[] = ['image', 'title', 'authors', 'edit', 'delete'];
+  displayedColumns: string[] = ['fav', 'image', 'title', 'authors', 'edit', 'delete'];
   dataSource = new MatTableDataSource<Book>();
 
   private paginator: MatPaginator;
@@ -87,6 +87,11 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookService.deleteBook(bookId).subscribe(() => {
       this.bookService.getBooks();
     });
+  }
+
+  onToggleFav(bookId: string, bookFav: boolean) {
+    this.isLoading = true;
+    this.bookService.toggleFav(bookId, !bookFav);
   }
 
   ngOnDestroy() {

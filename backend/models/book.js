@@ -11,8 +11,8 @@ const bookSchema = mongoose.Schema({
   publisher: { type: String },
   publishedDate: { type: String },
   previewLink: { type: String },
-  ean13: { type: String }
-  // favourite: { type: Boolean },
+  ean13: { type: String },
+  favourite: { type: Boolean }
   // toRead: { type: Boolean }
 });
 
