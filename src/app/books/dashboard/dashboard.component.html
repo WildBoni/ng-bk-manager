@@ -27,12 +27,14 @@
   <div *ngFor="let favBook of favBooks">
     <mat-card>
       <mat-card-header>
-        <button mat-button color="warn" (click)="onToggleFav(favBook.id, favBook.favourite)">
-          <i class="material-icons">{{ favBook.favourite ? 'favorite' : 'favorite_border'}}</i>
-        </button>
         <mat-card-title>
           {{ favBook.title }}
         </mat-card-title>
+        <div>
+          <button mat-button color="warn" (click)="onToggleFav(favBook.id, favBook.favourite)">
+            <i class="material-icons">{{ favBook.favourite ? 'favorite' : 'favorite_border'}}</i>
+          </button>
+        </div>
         <mat-card-subtitle>
           {{ favBook.authors }}
         </mat-card-subtitle>

@@ -77,14 +77,10 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
             item.thumbnail = "none";
           }
           if(item.volumeInfo.industryIdentifiers) {
-            if(item.volumeInfo.industryIdentifiers.type) {
-              let ean13 = item.volumeInfo.industryIdentifiers
-              .find(f => f.type == "ISBN_13");
-              if(ean13){
-                item.ean13 = ean13.identifier;
-              } else {
-                item.ean13 = "";
-              }
+            let ean13 = item.volumeInfo.industryIdentifiers
+            .find(f => f.type == "ISBN_13");
+            if(ean13){
+              item.ean13 = ean13.identifier;
             } else {
               item.ean13 = "";
             }

@@ -23,3 +23,7 @@ img {
   width: calc(50% - 20px);
   margin-right: 10px;
 }
+
+.fav {
+  float: right;
+}
