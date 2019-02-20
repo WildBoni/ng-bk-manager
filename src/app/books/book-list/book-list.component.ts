@@ -21,6 +21,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 })
 export class BookListComponent implements OnInit, OnDestroy {
   // books: Book[] = [];
+  searchValue="";
   emptyLibrary: boolean;
   isLoading = false;
   userIsAuthenticated = false;
@@ -79,6 +80,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   doFilter(filterValue: string) {
+    this.searchValue = filterValue;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

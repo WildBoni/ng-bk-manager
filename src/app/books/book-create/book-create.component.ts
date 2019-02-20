@@ -25,14 +25,14 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   languagesData = [];
   categoriesData = [];
   bookImg = '';
-  bookFav: boolean = false;
   bookPreviewLink = '';
   isLoading = false;
   private mode = 'create';
-  bookId: string;
   private authStatusSub: Subscription;
-  private bookSub: Subscription;
   bookForm: FormGroup;
+  private bookSub: Subscription;
+  bookFav: boolean = false;
+  bookId: string;
 
   get authors() {
     return this.bookForm.get('authors') as FormArray
@@ -218,6 +218,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.bookSub.unsubscribe();
     this.authStatusSub.unsubscribe();
   }
 
