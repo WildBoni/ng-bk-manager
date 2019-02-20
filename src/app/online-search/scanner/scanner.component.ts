@@ -50,6 +50,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     this.scanSub = this.uiService.getScanStatusListener()
       .subscribe((status: boolean) => {
           if(status === true) {
+            this.books = [];
             this.BarecodeScanner.start();
           }
         });
