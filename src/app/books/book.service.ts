@@ -17,8 +17,10 @@ const BACKEND_URL = environment.apiUrl + "/books/";
 })
 
 export class BookService {
+  // private book: Book;
   private books: Book[] = [];
   private booksUpdated = new Subject<Book[]>();
+  private bookUpdated = new Subject<any>();
 
   constructor(
     private http: HttpClient,
@@ -58,8 +60,12 @@ export class BookService {
       });
   }
 
-  getBookUpdateListener() {
+  getBooksUpdateListener() {
     return this.booksUpdated.asObservable();
+  }
+
+  getBookUpdateListener() {
+    return this.bookUpdated.asObservable();
   }
 
   getBook(id: string) {
@@ -181,9 +187,23 @@ export class BookService {
         .subscribe(response => {
           const updatedBooks = [...this.books];
           const oldBookIndex = updatedBooks.findIndex(book => book.id === payload.id);
-          updatedBooks[oldBookIndex].favourite = response.favourite;
+          updatedBooks[oldBookIndex].favourite = response['favourite'];
           this.books = updatedBooks;
           this.booksUpdated.next([...this.books]);
+          this.uiService.showSnackbar('Fav toggled!', '', 500);
+        });
+  }
+
+  toggleSingleFav(id, fav) {
+    const payload: any = {
+      favourite: fav,
+      id: id
+    };
+    this.http
+      .put(BACKEND_URL + "fav/" + id, payload)
+        .subscribe(response => {
+          let book = response;
+          this.bookUpdated.next(book);
           this.uiService.showSnackbar('Fav toggled!', '', 500);
         });
   }

@@ -11,16 +11,22 @@ import { BookService } from '../book.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   books: Book[] = [];
+  favBooks: Book[] = [];
   private bookSub: Subscription;
 
   constructor(public bookService: BookService) {}
 
   ngOnInit() {
     this.bookService.getBooks();
-    this.bookSub = this.bookService.getBookUpdateListener()
+    this.bookSub = this.bookService.getBooksUpdateListener()
       .subscribe((books: Book[]) => {
+        this.favBooks = books.filter(bookFav => bookFav.favourite === true);
         this.books = books.slice(0,5);
       });
+  }
+
+  onToggleFav(favBookId: string, favBookFav: boolean) {
+    this.bookService.toggleFav(favBookId, !favBookFav);
   }
 
   ngOnDestroy() {

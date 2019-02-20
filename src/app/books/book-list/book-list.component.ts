@@ -57,7 +57,7 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.booksSub = this.bookService.getBookUpdateListener()
+    this.booksSub = this.bookService.getBooksUpdateListener()
       .subscribe((books: Book[]) => {
           this.isLoading = false;
           this.dataSource.data = books;

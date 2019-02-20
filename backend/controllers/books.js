@@ -107,7 +107,6 @@ exports.updateFav = (req, res, next) => {
     { new: true }
   ).then(result => {
     if (result) {
-      console.log(result);
       res.status(200).json({
         message: "Fav successfull!",
         favourite: result.favourite,

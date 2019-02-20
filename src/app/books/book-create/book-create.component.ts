@@ -20,7 +20,7 @@ import { AuthService } from "../../auth/auth.service";
   styleUrls: ['./book-create.component.css']
 })
 export class BookCreateComponent implements OnInit, OnDestroy {
-  book: Book;
+  // book: Book;
   authorsData = [];
   languagesData = [];
   categoriesData = [];
@@ -29,8 +29,9 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   bookPreviewLink = '';
   isLoading = false;
   private mode = 'create';
-  private bookId: string;
+  bookId: string;
   private authStatusSub: Subscription;
+  private bookSub: Subscription;
   bookForm: FormGroup;
 
   get authors() {
@@ -107,6 +108,11 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.bookSub = this.bookService.getBookUpdateListener()
+      .subscribe((book: any) => {
+        this.bookFav = book.favourite;
+      });
+
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       authors: this.fb.array([
@@ -145,7 +151,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
             publisher: bookData.publisher,
             publishedDate: bookData.publishedDate,
             previewLink: bookData.previewLink,
-            ean13: bookData.ean13
+            ean13: bookData.ean13,
           });
           this.authorsData = bookData.authors;
           this.getAuthors();
@@ -156,10 +162,13 @@ export class BookCreateComponent implements OnInit, OnDestroy {
           this.bookImg = bookData.thumbnail;
           this.bookPreviewLink = bookData.previewLink;
           this.bookFav = bookData.favourite;
+          // this.book = bookData;
+          // console.log(this.book);
         });
       } else {
         this.mode = 'create';
         this.bookId = null;
+        // this.book.favourite = false;
       }
     });
   }
@@ -202,6 +211,10 @@ export class BookCreateComponent implements OnInit, OnDestroy {
       );
     }
     this.isLoading = false;
+  }
+
+  onToggleFav(favBookId: string, favBookFav: boolean) {
+    this.bookService.toggleSingleFav(favBookId, !favBookFav);
   }
 
   ngOnDestroy() {
