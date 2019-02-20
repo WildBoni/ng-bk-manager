@@ -184,12 +184,18 @@ export class BookService {
     };
     this.http
       .put(BACKEND_URL + "fav/" + id, payload)
+        // .subscribe(response => {
+        //   const updatedBooks = [...this.books];
+        //   const oldBookIndex = updatedBooks.findIndex(book => book.id === payload.id);
+        //   updatedBooks[oldBookIndex].favourite = response['favourite'];
+        //   this.books = updatedBooks;
+        //   this.booksUpdated.next([...this.books]);
+        //   this.uiService.showSnackbar('Fav toggled!', '', 500);
+        // });
         .subscribe(response => {
-          const updatedBooks = [...this.books];
-          const oldBookIndex = updatedBooks.findIndex(book => book.id === payload.id);
-          updatedBooks[oldBookIndex].favourite = response['favourite'];
-          this.books = updatedBooks;
-          this.booksUpdated.next([...this.books]);
+          let book = response;
+          console.log(book);
+          this.bookUpdated.next(book);
           this.uiService.showSnackbar('Fav toggled!', '', 500);
         });
   }

@@ -38,8 +38,8 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
   }
 
   scanAgain() {
-    this.BarecodeScanner.start();
     this.books = [];
+    this.BarecodeScanner.start();
     this.barcodeValue = "";
   }
 
