@@ -64,7 +64,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     .subscribe((book: any) => {
       let bookFav = book.favourite;
       let bookId = book.id;
-      this.updateFav(bookFav, bookId);
+      this.updateFav(bookId, bookFav);
     });
 
     this.isLoading = true;
@@ -102,13 +102,12 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   onToggleFav(bookId: string, bookFav: boolean) {
     // this.isLoading = true;
-    this.bookService.toggleFav(bookId, !bookFav);
+    this.bookService.toggleSingleFav(bookId, !bookFav);
   }
 
-  updateFav(bookFav: string, bookId: boolean) {
-    this.bookId = bookId;
+  updateFav(bookId: string, bookFav: boolean) {
     const bookData = [...this.dataSource.data];
-    let favBook = bookData.find(book => book.id == this.bookId);
+    let favBook = bookData.find(book => book.id == bookId);
     favBook.favourite = bookFav;
   }
 
