@@ -1,5 +1,12 @@
+h2, h3 {
+  margin-left: 10px;
+  margin-top: 25px;
+}
+
 mat-card {
-  margin: 50px 0;
+  height: auto;
+  margin: 10px 10px;
+  min-width: 250px;
 }
 mat-card-content {
   display: flex;
@@ -13,14 +20,21 @@ mat-card-content img {
   text-align: center;
 }
 
-.button-container {
-  text-align: center;
+.card-carousel {
+  display: flex;
+  overflow-x: auto;
+}
+
+@media (min-width: 500px)  {
+  .card-carousel {
+  /* overflow: auto; */
+  }
 }
 
 .button-nav {
   margin: 10px 10px;
 }
 
-h2, h3 {
-  margin-left: 10px;
+.button-container {
+  text-align: center;
 }
