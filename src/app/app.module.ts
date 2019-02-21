@@ -5,8 +5,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
-// import { BarecodeScannerLivestreamModule } from 'ngx-barcode-scanner';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { BarecodeScannerLivestreamModule } from 'ngx-barcode-scanner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,8 +38,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    // BarecodeScannerLivestreamModule,
-    ZXingScannerModule,
+    BarecodeScannerLivestreamModule,
     HttpModule,
     HttpClientModule,
     AngularMaterialModule,

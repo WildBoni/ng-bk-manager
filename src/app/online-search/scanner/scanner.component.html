@@ -1,10 +1,7 @@
-<!-- <barcode-scanner-livestream type="ean" (valueChanges)="onValueChanges($event)"></barcode-scanner-livestream> -->
-<zxing-scanner #scanner (camerasFound)="camerasFoundHandler($event)"
- [formats]="['EAN_13']" (scanComplete)="onValueChanges($event)">
-</zxing-scanner>
+<barcode-scanner-livestream type="ean" (valueChanges)="onValueChanges($event)"></barcode-scanner-livestream>
 <div [hidden]="!barcodeValue" class="scan-value">
-  <h3>The scanner read: <strong>{{barcodeValue}}</strong></h3>
-  <button mat-flat-button color="accent" (click)="scanAgain()">Scan again</button>
+    <h3>The scanner read: <strong>{{barcodeValue}}</strong></h3>
+    <button mat-flat-button color="accent" (click)="scanAgain()">Scan again</button>
 </div>
 <div *ngIf="books">
   <mat-card *ngFor="let book of books">
