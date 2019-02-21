@@ -45,7 +45,8 @@ import { environment } from '../environments/environment';
     // FlexLayoutModule,
     BooksModule,
     NavigationModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : []
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
