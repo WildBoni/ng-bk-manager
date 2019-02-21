@@ -1,5 +1,8 @@
 import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { BarecodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
+// import { BarecodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
+
+import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { Result } from '@zxing/library';
 
 import { BookService } from '../../books/book.service';
 import { UIService } from '../../shared/ui.service';
@@ -14,9 +17,17 @@ import { Subscription, Observable, of } from 'rxjs';
   styleUrls: ['./scanner.component.css']
 })
 export class ScannerComponent implements AfterViewInit, OnDestroy {
-  @ViewChild(BarecodeScannerLivestreamComponent)
-  BarecodeScanner: BarecodeScannerLivestreamComponent;
+  @ViewChild('scanner')
+  scanner: ZXingScannerComponent
+  // @ViewChild(BarecodeScannerLivestreamComponent)
+  // BarecodeScanner: BarecodeScannerLivestreamComponent;
   barcodeValue;
+  deviceId;
+
+  camerasFoundHandler(event) {
+      this.scanner.scan(event[0].deviceId);
+      this.deviceId = event[0].deviceId;
+  }
 
   books: any[];
   private scanSub: Subscription;
@@ -28,19 +39,23 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    this.BarecodeScanner.start();
+    // this.BarecodeScanner.start();
   }
 
   onValueChanges(value){
-    this.barcodeValue = value.code;
-    this.BarecodeScanner.stop();
+    console.log(value);
+    this.barcodeValue = value.text;
+    this.scanner.resetCodeReader();
+    console.log(this.scanner);
+    // this.BarecodeScanner.stop();
     this.searchResult(this.barcodeValue);
   }
 
   scanAgain() {
     this.books = [];
     this.barcodeValue = "";
-    this.BarecodeScanner.start();
+    this.scanner.scan(this.deviceId);
+    // this.BarecodeScanner.start();
   }
 
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
@@ -51,8 +66,9 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
       .subscribe((status: boolean) => {
           if(status === true) {
             this.books = [];
-            this.barcodeValue = ""; 
-            this.BarecodeScanner.start();
+            this.barcodeValue = "";
+            this.scanner.scan(this.deviceId);
+            // this.BarecodeScanner.start();
           }
         });
     this.bookService.addBook("scan", title, authors, thumbnail, languages, categories,
@@ -98,7 +114,8 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.BarecodeScanner.stop();
+    this.scanner.resetCodeReader();
+    // this.BarecodeScanner.stop();
     if(this.scanSub) {
       this.scanSub.unsubscribe();
     }
