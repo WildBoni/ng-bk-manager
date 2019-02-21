@@ -8,6 +8,7 @@ import {
   FormArray
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { Book } from '../book.model';
@@ -25,14 +26,15 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   languagesData = [];
   categoriesData = [];
   bookImg = '';
-  bookFav: boolean = false;
   bookPreviewLink = '';
   isLoading = false;
+  enableEdit = false;
   private mode = 'create';
-  bookId: string;
   private authStatusSub: Subscription;
-  private bookSub: Subscription;
   bookForm: FormGroup;
+  private bookSub: Subscription;
+  bookFav: boolean = false;
+  bookId: string;
 
   get authors() {
     return this.bookForm.get('authors') as FormArray
@@ -104,6 +106,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
     public bookService: BookService,
     public route: ActivatedRoute,
     private authService: AuthService,
+    private location: Location,
     private fb: FormBuilder
   ) { }
 
@@ -217,7 +220,12 @@ export class BookCreateComponent implements OnInit, OnDestroy {
     this.bookService.toggleSingleFav(favBookId, !favBookFav);
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   ngOnDestroy() {
+    this.bookSub.unsubscribe();
     this.authStatusSub.unsubscribe();
   }
 

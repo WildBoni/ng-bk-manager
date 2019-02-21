@@ -1,11 +1,12 @@
 {
   "name": "Angular Bookmanager",
-  "short_name": "ng-bookmanager",
+  "short_name": "ng-bkmanager",
+  "description": "Scan new books and manage your library",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "assets/icons/icon-48x48.png",

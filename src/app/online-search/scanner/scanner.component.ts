@@ -39,8 +39,8 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
 
   scanAgain() {
     this.books = [];
-    this.BarecodeScanner.start();
     this.barcodeValue = "";
+    this.BarecodeScanner.start();
   }
 
   onAddBook(id: string, title: string, authors: string[], thumbnail: string,
@@ -51,6 +51,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
       .subscribe((status: boolean) => {
           if(status === true) {
             this.books = [];
+            this.barcodeValue = "";
             this.BarecodeScanner.start();
           }
         });

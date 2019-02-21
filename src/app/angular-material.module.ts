@@ -15,6 +15,7 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatSnackBarModule,
+  MatGridListModule,
   MAT_SNACK_BAR_DATA
 } from "@angular/material";
 
@@ -33,7 +34,8 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatGridListModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DATA, useValue: {duration: 2500}}

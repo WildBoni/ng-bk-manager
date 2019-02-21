@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <a mat-button color="primary"
+    (click)="goBack()">
+    <i class="material-icons">arrow_back_ios</i> Back
+  </a>
+</mat-toolbar>
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSaveBook(myForm)" #myForm= "ngForm" [formGroup]="bookForm"
@@ -8,8 +14,8 @@
         <i *ngIf="favourite" class="material-icons">favorite</i>
       </button>
     </mat-form-field> -->
-    <button mat-button type="button" class="fav" color="warn" (click)="onToggleFav(bookId, bookFav)">
-      <i class="material-icons">{{ bookFav ? 'favorite' : 'favorite_border'}}</i>
+    <button mat-icon-button type="button" color="warn" (click)="onToggleFav(book.id, book.favourite)">
+      <mat-icon>{{ book.favourite ? 'favorite' : 'favorite_border'}}</mat-icon>
     </button>
     <mat-form-field class="full-width">
       <input matInput required type="text"
@@ -119,9 +125,9 @@
     </div>
     <div class="button-container">
       <button mat-flat-button color="accent"
-      type="submit" [disabled]="!bookForm.valid">
-      Save book
-    </button>
+        type="submit" [disabled]="!bookForm.valid">
+        Save book
+      </button>
     </div>
   </form>
 </mat-card>

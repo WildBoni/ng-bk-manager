@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './online-search/search/search.component';
 import { DashboardComponent } from './books/dashboard/dashboard.component';
 import { BookCreateComponent } from './books/book-create/book-create.component';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookListComponent } from './books/book-list/book-list.component';
 import { ScannerComponent } from './online-search/scanner/scanner.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'books', component: BookListComponent, canActivate: [AuthGuard] },
+  { path: 'book/:bookId', component: BookDetailComponent, canActivate: [AuthGuard] },
   { path: 'edit/:bookId', component: BookCreateComponent, canActivate: [AuthGuard] },
   { path: 'scanner', component: ScannerComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
