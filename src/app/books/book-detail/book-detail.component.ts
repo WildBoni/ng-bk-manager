@@ -48,9 +48,10 @@ export class BookDetailComponent {
     this.bookService.getBook(this.bookId)
       .subscribe(bookData => {
         this.isLoading = false;
-        bookData.id = bookData._id;
-        delete bookData._id;
-        this.book = bookData;
+        let fetchedBookData: any = bookData;
+        fetchedBookData.id = bookData._id;
+        delete fetchedBookData._id;
+        this.book = fetchedBookData;
         console.log(this.book);
       });
   }
