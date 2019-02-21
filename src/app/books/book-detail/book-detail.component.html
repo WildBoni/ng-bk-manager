@@ -1,0 +1,43 @@
+<a mat-button color="primary"
+  (click)="goBack()">
+  <i class="material-icons">arrow_back_ios</i> Back
+</a>
+<div *ngIf="book">
+  <mat-card>
+    <mat-card-header>
+      <div>
+        <button mat-icon-button type="button" color="warn" (click)="onToggleFav(book.id, book.favourite)">
+          <mat-icon>{{ book.favourite ? 'favorite' : 'favorite_border'}}</mat-icon>
+        </button>
+      </div>
+      <mat-card-title>
+        {{ book.title }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ book.authors }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img src="{{ book.thumbnail }}" />
+    <mat-card-content>
+      <p>Language: {{ book.languages }}</p>
+      <p>Categories: {{ book.categories }}</p>
+      <p>Pages: {{ book.pageCount }}</p>
+      <p>Publisher: {{ book.publisher }}</p>
+      <p>Published in: {{ book.publishedDate }}</p>
+      <!-- <p>Preview link: {{ book.volumeInfo.previewLink }}</p> -->
+      <p *ngIf=" book.previewLink">
+        <a href="{{ book.previewLink }}" target="_blank"
+          mat-stroked-button>
+          <i class="material-icons">picture_as_pdf</i> Preview
+        </a>
+      </p>
+      <p>Ean Code: {{ book.ean13 }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button color="accent"
+        [routerLink]="['/edit', book.id]">
+        Edit
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</div>
