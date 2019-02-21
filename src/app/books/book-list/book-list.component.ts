@@ -27,8 +27,11 @@ export class BookListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   userId: string;
   private booksSub: Subscription;
-  private authStatusSub: Subscription
+  private authStatusSub: Subscription;
 
+  // bookFav: boolean = false;
+  // bookId: string;
+  private bookSub: Subscription;
 
   displayedColumns: string[] = ['fav', 'image', 'title', 'authors', 'edit', 'delete'];
   dataSource = new MatTableDataSource<Book>();
@@ -57,6 +60,14 @@ export class BookListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+
+    this.bookSub = this.bookService.getBookUpdateListener()
+    .subscribe((book: any) => {
+      let bookFav = book.favourite;
+      let bookId = book.id;
+      this.updateFav(bookId, bookFav);
+    });
+
     this.isLoading = true;
     this.booksSub = this.bookService.getBooksUpdateListener()
       .subscribe((books: Book[]) => {
@@ -92,11 +103,18 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   onToggleFav(bookId: string, bookFav: boolean) {
-    this.isLoading = true;
-    this.bookService.toggleFav(bookId, !bookFav);
+    // this.isLoading = true;
+    this.bookService.toggleSingleFav(bookId, !bookFav);
+  }
+
+  updateFav(bookId: string, bookFav: boolean) {
+    const bookData = [...this.dataSource.data];
+    let favBook = bookData.find(book => book.id == bookId);
+    favBook.favourite = bookFav;
   }
 
   ngOnDestroy() {
+    this.bookSub.unsubscribe();
     this.booksSub.unsubscribe();
     this.authStatusSub.unsubscribe();
   }
