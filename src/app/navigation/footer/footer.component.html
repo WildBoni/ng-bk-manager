@@ -1,0 +1,18 @@
+<h3 *ngIf="!userIsAuthenticated">Ready?</h3>
+<mat-toolbar *ngIf="userIsAuthenticated" class="service-row">
+  <a mat-icon-button type="button" routerLink='/dashboard'>
+    <mat-icon class="example-icon">dashboard</mat-icon>
+  </a>
+  <a mat-icon-button type="button" routerLink='/books'>
+    <mat-icon class="example-icon">library_books</mat-icon>
+  </a>
+  <a mat-icon-button type="button" routerLink='/scanner'>
+    <mat-icon class="example-icon">border_horizontal</mat-icon>
+  </a>
+  <a mat-icon-button type="button" routerLink='/search'>
+    <mat-icon class="example-icon">search</mat-icon>
+  </a>
+  <a mat-icon-button type="button" routerLink='/insert'>
+    <mat-icon class="example-icon">add_circle</mat-icon>
+  </a>
+</mat-toolbar>

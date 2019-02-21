@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  EventEmitter,
-  Output,
   OnDestroy
 } from '@angular/core';
 
@@ -11,12 +9,11 @@ import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  @Output() sidenavToggle = new EventEmitter<void>();
+export class FooterComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private authListenerSub: Subscription;
 
@@ -28,10 +25,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
       })
-  }
-
-  onToggleSidenav() {
-    this.sidenavToggle.emit();
   }
 
   onLogout() {

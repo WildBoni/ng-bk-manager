@@ -2,20 +2,6 @@
 <div *ngIf="!isLoading && emptyLibrary" class="dashboard-info">
   <h3>Your library is empty... It's time to add your books!</h3>
 </div>
-<div class="button-container">
-  <a mat-flat-button color="accent" class="button-nav"
-    [routerLink]="['/scanner']">
-    Scan
-  </a>
-  <a mat-flat-button color="basic" class="button-nav"
-    [routerLink]="['/search']">
-    Search
-  </a>
-  <a mat-flat-button color="basic" class="button-nav"
-    [routerLink]="['/insert']">
-    Insert
-  </a>
-</div>
 <mat-form-field *ngIf="!isLoading && !emptyLibrary">
   <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" [value]="searchValue">
 </mat-form-field>

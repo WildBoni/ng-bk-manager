@@ -1,7 +1,30 @@
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+mat-sidenav {
   height: 100%;
 }
 
 mat-sidenav {
   width: 250px;
+}
+
+.all-wrap {
+  min-height: 100vh;
+}
+
+app-header {
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+}
+
+main {
+  margin-top: 56px;
+  margin-bottom: 56px;
+}
+
+app-footer {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  width: 100%;
 }
