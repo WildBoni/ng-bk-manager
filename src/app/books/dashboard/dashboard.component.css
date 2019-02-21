@@ -16,6 +16,11 @@ mat-card-content img {
   margin-right: 10px;
 }
 
+.mat-stroked-button {
+  margin-top: 4px;
+  display: inline-block;
+}
+
 .dashboard-info {
   text-align: center;
 }

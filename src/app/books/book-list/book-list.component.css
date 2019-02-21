@@ -35,6 +35,10 @@ img {
   text-align: center;
 }
 
+.cdk-column-title {
+  flex: 0 0 100px;
+}
+
 .button-container {
   text-align: center;
   margin-top: 10px;
