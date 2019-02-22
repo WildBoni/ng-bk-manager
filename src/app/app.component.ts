@@ -8,7 +8,7 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'mean-book';
+  title = 'Ng-BkManager';
 
   constructor(private authService: AuthService) {}
 

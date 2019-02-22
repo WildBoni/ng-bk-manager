@@ -2,9 +2,9 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  AfterViewInit,
   ViewChild
 } from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import { Subscription } from 'rxjs';
 
@@ -17,23 +17,30 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  styleUrls: ['./book-list.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class BookListComponent implements OnInit, OnDestroy {
   // books: Book[] = [];
   searchValue="";
   emptyLibrary: boolean;
   isLoading = false;
-  userIsAuthenticated = false;
-  userId: string;
+  // userIsAuthenticated = false;
+  // userId: string;
   private booksSub: Subscription;
-  private authStatusSub: Subscription;
+  // private authStatusSub: Subscription;
 
   // bookFav: boolean = false;
   // bookId: string;
   private bookSub: Subscription;
 
-  displayedColumns: string[] = ['fav', 'image', 'title', 'authors', 'edit', 'delete'];
+  displayedColumns: string[] = ['image', 'title', 'authors'];
   dataSource = new MatTableDataSource<Book>();
 
   private paginator: MatPaginator;
@@ -80,14 +87,14 @@ export class BookListComponent implements OnInit, OnDestroy {
           }
         });
     this.bookService.getBooks();
-    this.userId = this.authService.getUserId();
+    // this.userId = this.authService.getUserId();
 
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    this.authStatusSub = this.authService.getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-        this.userId = this.authService.getUserId();
-      })
+    // this.userIsAuthenticated = this.authService.getIsAuth();
+    // this.authStatusSub = this.authService.getAuthStatusListener()
+    //   .subscribe(isAuthenticated => {
+    //     this.userIsAuthenticated = isAuthenticated;
+    //     this.userId = this.authService.getUserId();
+    //   })
   }
 
   doFilter(filterValue: string) {
@@ -116,7 +123,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.bookSub.unsubscribe();
     this.booksSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    // this.authStatusSub.unsubscribe();
   }
 
 }

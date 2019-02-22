@@ -15,10 +15,14 @@
       </button>
     </mat-form-field> -->
     <div *ngIf="mode == 'edit'">
+      <h3 align="center">Edit book</h3>
       <button mat-icon-button type="button" color="warn"
         (click)="onToggleFav(bookId, bookFav)">
         <mat-icon>{{ bookFav ? 'favorite' : 'favorite_border'}}</mat-icon>
       </button>
+    </div>
+    <div *ngIf="mode == 'create'">
+      <h3 align="center">Insert new book</h3>
     </div>
     <mat-form-field class="full-width">
       <input matInput required type="text"
