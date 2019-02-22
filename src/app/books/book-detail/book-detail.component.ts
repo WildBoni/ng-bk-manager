@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -14,11 +14,11 @@ import { AuthService } from "../../auth/auth.service";
   templateUrl: './book-detail.component.html',
   styleUrls: ['./book-detail.component.css']
 })
-export class BookDetailComponent {
+export class BookDetailComponent implements OnInit, OnDestroy {
   book: Book;
 
   isLoading = false;
-  private authStatusSub: Subscription;
+  // private authStatusSub: Subscription;
   private bookSub: Subscription;
   bookFav: boolean = false;
   bookId: string;
@@ -28,7 +28,7 @@ export class BookDetailComponent {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private authService: AuthService,
+    // private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -37,11 +37,11 @@ export class BookDetailComponent {
         this.book.favourite = book.favourite;
       });
 
-    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
-      authStatus => {
-        this.isLoading = false;
-      }
-    );
+    // this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+    //   authStatus => {
+    //     this.isLoading = false;
+    //   }
+    // );
 
     this.bookId = this.route.snapshot.paramMap.get('bookId');
     this.isLoading = true;
@@ -66,6 +66,6 @@ export class BookDetailComponent {
 
   ngOnDestroy() {
     this.bookSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    // this.authStatusSub.unsubscribe();
   }
 }

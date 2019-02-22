@@ -5,6 +5,7 @@
   </a>
   <div *ngIf="book">
     <mat-card>
+      <h3 align="center">Book Details</h3>
       <mat-card-header>
         <div>
           <button mat-icon-button type="button" color="warn" (click)="onToggleFav(book.id, book.favourite)">
@@ -12,10 +13,11 @@
           </button>
         </div>
         <mat-card-title>
+          Title: <br />
           {{ book.title }}
         </mat-card-title>
         <mat-card-subtitle>
-          {{ book.authors }}
+          Authors: {{ book.authors }}
         </mat-card-subtitle>
       </mat-card-header>
       <img src="{{ book.thumbnail }}" />

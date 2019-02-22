@@ -30,7 +30,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   isLoading = false;
   enableEdit = false;
   private mode = 'create';
-  private authStatusSub: Subscription;
+  // private authStatusSub: Subscription;
   bookForm: FormGroup;
   private bookSub: Subscription;
   bookFav: boolean = false;
@@ -105,7 +105,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
   constructor(
     public bookService: BookService,
     public route: ActivatedRoute,
-    private authService: AuthService,
+    // private authService: AuthService,
     private location: Location,
     private fb: FormBuilder
   ) { }
@@ -135,11 +135,11 @@ export class BookCreateComponent implements OnInit, OnDestroy {
       ean13: ['']
     });
 
-    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
-      authStatus => {
-        this.isLoading = false;
-      }
-    );
+    // this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+    //   authStatus => {
+    //     this.isLoading = false;
+    //   }
+    // );
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if(paramMap.has('bookId')) {
         this.mode = 'edit';
@@ -226,7 +226,7 @@ export class BookCreateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.bookSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
+    // this.authStatusSub.unsubscribe();
   }
 
 }

@@ -56,7 +56,7 @@ export class BookService {
       .subscribe((transformedBooks) => {
         this.books = transformedBooks;
         this.booksUpdated.next([...this.books]);
-        this.uiService.showSnackbar('Books fetched succesfully!', null, 1000);
+        this.uiService.showSnackbar('Books fetched succesfully!', null, 500);
       });
   }
 
