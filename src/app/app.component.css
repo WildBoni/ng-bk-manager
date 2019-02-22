@@ -11,10 +11,10 @@ mat-sidenav {
 }
 
 app-header {
-  width: 100%;
+  /* width: 100%;
   position: fixed;
+  top: 0; */
   z-index: 9999;
-  top: 0;
 }
 
 main {
@@ -25,8 +25,5 @@ main {
 }
 
 app-footer {
-  position: fixed;
   z-index: 9999;
-  bottom: 0;
-  width: 100%;
 }
