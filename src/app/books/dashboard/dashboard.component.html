@@ -1,63 +1,43 @@
-<h2>Dashboard</h2>
-<div *ngIf="books.length === 0" class="dashboard-info">
-  <h3>Your library is empty... It's time to add your books!</h3>
-</div>
-<div class="button-container" *ngIf="books.length > 0">
-  <a mat-flat-button color="primary" class="button-nav"
-    [routerLink]="['/books']">
-    Your Library
-  </a>
-</div>
-<div class="button-container">
-  <a mat-flat-button color="accent" class="button-nav"
-    [routerLink]="['/scanner']">
-    Scan
-  </a>
-  <a mat-flat-button color="basic" class="button-nav"
-    [routerLink]="['/search']">
-    Search
-  </a>
-  <a mat-flat-button color="basic" class="button-nav"
-    [routerLink]="['/insert']">
-    Insert
-  </a>
-</div>
-<div *ngIf="favBooks">
-  <h3>Your favourite books:</h3>
-  <div class="card-carousel">
-    <div *ngFor="let favBook of favBooks">
-      <mat-card>
-        <mat-card-header>
-          <div>
-            <button mat-icon-button type="button" color="warn" (click)="onToggleFav(favBook.id, favBook.favourite)">
-              <mat-icon>{{ favBook.favourite ? 'favorite' : 'favorite_border'}}</mat-icon>
-            </button>
-          </div>
-          <mat-card-title>
-            {{ favBook.title }}
-          </mat-card-title>
-          <mat-card-subtitle>
-            {{ favBook.authors }}
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <img src="{{ favBook.thumbnail }}" />
-          <div>
-            <p>Language: {{ favBook.languages }}</p>
-            <p>Categories: {{ favBook.categories }}</p>
-            <a mat-stroked-button color="primary"
+<div class="container">
+  <div *ngIf="books.length === 0" class="dashboard-info">
+    <h3>Your library is empty... It's time to add your books!</h3>
+  </div>
+  <div *ngIf="favBooks">
+    <h3>Your favourite books:</h3>
+    <div class="card-carousel">
+      <div *ngFor="let favBook of favBooks">
+        <mat-card>
+          <mat-card-header>
+            <div>
+              <button mat-icon-button type="button" color="warn" (click)="onToggleFav(favBook.id, favBook.favourite)">
+                <mat-icon>{{ favBook.favourite ? 'favorite' : 'favorite_border'}}</mat-icon>
+              </button>
+            </div>
+            <mat-card-title>
+              {{ favBook.title }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{ favBook.authors }}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <img src="{{ favBook.thumbnail }}" />
+            <div>
+              <p>Language: {{ favBook.languages }}</p>
+              <p>Categories: {{ favBook.categories }}</p>
+              <a mat-stroked-button color="primary"
               [routerLink]="['/book', favBook.id]">
               <i class="material-icons">insert_drive_file</i> Detail
             </a><br />
             <a mat-stroked-button color="accent"
-              [routerLink]="['/edit', favBook.id]">
-              <i class="material-icons">edit</i> Edit
-            </a>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+            [routerLink]="['/edit', favBook.id]">
+            <i class="material-icons">edit</i> Edit
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
+</div>
 </div>
 <div *ngIf="books">
   <h3>Last inserted books:</h3>
@@ -83,16 +63,17 @@
             <p>Language: {{ book.languages }}</p>
             <p>Categories: {{ book.categories }}</p>
             <a mat-stroked-button color="primary"
-              [routerLink]="['/book', book.id]">
-              <i class="material-icons">insert_drive_file</i> Detail
-            </a><br />
-            <a mat-stroked-button color="accent"
-              [routerLink]="['/edit', book.id]">
-              <i class="material-icons">edit</i> Edit
-            </a>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  </div>
+            [routerLink]="['/book', book.id]">
+            <i class="material-icons">insert_drive_file</i> Detail
+          </a><br />
+          <a mat-stroked-button color="accent"
+          [routerLink]="['/edit', book.id]">
+          <i class="material-icons">edit</i> Edit
+        </a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+</div>
 </div>

@@ -56,7 +56,7 @@ export class BookService {
       .subscribe((transformedBooks) => {
         this.books = transformedBooks;
         this.booksUpdated.next([...this.books]);
-        this.uiService.showSnackbar('Books fetched succesfully!', null, 3000);
+        this.uiService.showSnackbar('Books fetched succesfully!', null, 1000);
       });
   }
 
@@ -107,6 +107,9 @@ export class BookService {
       ean13: ean13,
       favourite: favourite
     };
+    if(book.thumbnail == "none") {
+      book.thumbnail = "assets/icons/icon-128x128.png";
+    }
     switch (mode)
     {
        case "scan":
@@ -164,6 +167,9 @@ export class BookService {
       ean13: ean13,
       favourite: favourite
     };
+    if(book.thumbnail == "none" || book.thumbnail == "") {
+      book.thumbnail = "assets/icons/icon-96x96.png";
+    }
     this.http
       .put(BACKEND_URL + id, book)
         .subscribe(response => {

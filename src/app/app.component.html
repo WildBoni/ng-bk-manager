@@ -1,11 +1,14 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="all-wrap" fullscreen>
   <mat-sidenav #sidenav mode="over" role="navigation">
     <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
-    <main>
+  <mat-sidenav-content class="page-wrap">
+    <app-header (sidenavToggle)="sidenav.toggle()">
+    </app-header>
+    <main class="content">
       <router-outlet></router-outlet>
     </main>
+    <app-footer>
+    </app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

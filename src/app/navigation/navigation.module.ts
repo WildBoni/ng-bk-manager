@@ -6,11 +6,13 @@ import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './../angular-material.module';
 
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { SidenavListComponent } from './sidenav/sidenav-list.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    FooterComponent,
     SidenavListComponent
   ],
   imports: [
@@ -21,6 +23,7 @@ import { SidenavListComponent } from './sidenav/sidenav-list.component';
   ],
   exports: [
     HeaderComponent,
+    FooterComponent,
     SidenavListComponent
   ]
 })

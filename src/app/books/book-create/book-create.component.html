@@ -14,9 +14,12 @@
         <i *ngIf="favourite" class="material-icons">favorite</i>
       </button>
     </mat-form-field> -->
-    <button mat-icon-button type="button" color="warn" (click)="onToggleFav(book.id, book.favourite)">
-      <mat-icon>{{ book.favourite ? 'favorite' : 'favorite_border'}}</mat-icon>
-    </button>
+    <div *ngIf="mode == 'edit'">
+      <button mat-icon-button type="button" color="warn"
+        (click)="onToggleFav(bookId, bookFav)">
+        <mat-icon>{{ bookFav ? 'favorite' : 'favorite_border'}}</mat-icon>
+      </button>
+    </div>
     <mat-form-field class="full-width">
       <input matInput required type="text"
         formControlName="title" placeholder="Book title">

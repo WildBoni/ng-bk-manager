@@ -1,0 +1,9 @@
+.service-row {
+  background-color: #ececec;
+  display: flex;
+  justify-content: space-around;
+}
+
+.example-icon {
+  flex: 1 1 auto;
+}
