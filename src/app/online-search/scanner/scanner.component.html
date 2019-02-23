@@ -15,12 +15,12 @@
     </mat-card-header>
     <img src="{{ book.thumbnail }}" />
     <mat-card-content>
-      <p>Language: {{ book.volumeInfo.language }}</p>
-      <p>Categories: {{ book.volumeInfo.categories }}</p>
-      <p>Pages: {{ book.volumeInfo.pageCount }}</p>
-      <p>Publisher: {{ book.volumeInfo.publisher }}</p>
-      <p>Published in: {{ book.volumeInfo.publishedDate }}</p>
-      <p>Ean Code: {{ book.ean13 }}</p>
+      <p>Language: {{ book.volumeInfo.language }}<br />
+      Categories: {{ book.volumeInfo.categories }}<br />
+      Pages: {{ book.volumeInfo.pageCount }}<br />
+      Publisher: {{ book.volumeInfo.publisher }}<br />
+      Published in: {{ book.volumeInfo.publishedDate }}<br />
+      Ean Code: {{ book.ean13 }}</p>
       <!-- <p>Preview link: {{ book.volumeInfo.previewLink }}</p> -->
       <p *ngIf=" book.volumeInfo.previewLink">
         <a href="{{ book.volumeInfo.previewLink }}" target="_blank"
