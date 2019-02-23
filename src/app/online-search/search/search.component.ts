@@ -4,6 +4,8 @@ import {
   OnDestroy,
   ViewChild
 } from '@angular/core';
+import { Location } from '@angular/common';
+
 
 import { BookService } from '../../books/book.service';
 import { GoogleBookApiService } from '../google-book-api.service';
@@ -37,6 +39,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
     private googleBookApiService : GoogleBookApiService,
     private bookService: BookService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -99,6 +102,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.dataSource.data = updatedBooks;
   }
 
+  goBack() {
+    this.location.back();
+  }
+  
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { BarecodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
+import { Location } from '@angular/common';
 
 import { BookService } from '../../books/book.service';
 import { UIService } from '../../shared/ui.service';
@@ -24,6 +25,7 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
   constructor(
     private googleBookApiService: GoogleBookApiService,
     private bookService: BookService,
+    private location: Location,
     private uiService: UIService
   ) {}
 
@@ -95,6 +97,10 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     } else {
       this.books = [];
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnDestroy() {

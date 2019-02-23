@@ -1,3 +1,9 @@
+<mat-toolbar>
+  <a mat-button color="primary"
+    (click)="goBack()">
+    <i class="material-icons">arrow_back_ios</i> Back
+  </a>
+</mat-toolbar>
 <barcode-scanner-livestream type="ean" (valueChanges)="onValueChanges($event)"></barcode-scanner-livestream>
 <div [hidden]="!barcodeValue" class="scan-value">
     <h3>The scanner read: <strong>{{barcodeValue}}</strong></h3>

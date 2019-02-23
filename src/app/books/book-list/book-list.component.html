@@ -1,6 +1,24 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 <div *ngIf="!isLoading && emptyLibrary" class="dashboard-info">
-  <h3>Your library is empty... It's time to add your books!</h3>
+  <h3>Your library is empty...<br />It's time to add your books!</h3>
+  <p>
+    <a mat-flat-button routerLink='/scanner' color="accent">
+      <mat-icon>border_horizontal</mat-icon>
+      <span class="nav-caption">Barcode scan</span>
+    </a>
+  </p>
+  <p>
+    <a mat-stroked-button routerLink='/search' color="basic">
+      <mat-icon>search</mat-icon>
+      <span class="nav-caption">Online search</span>
+    </a>
+  </p>
+  <p>
+    <a mat-stroked-button routerLink='/insert' color="basic">
+      <mat-icon>add</mat-icon>
+      <span class="nav-caption">Manually insert</span>
+    </a>
+  </p>
 </div>
 <mat-form-field *ngIf="!isLoading && !emptyLibrary">
   <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" [value]="searchValue">
