@@ -36,7 +36,8 @@
     <td mat-cell *matCellDef="let book" [attr.colspan]="displayedColumns.length">
       <div class="book-detail"
            [@detailExpand]="book == expandedBook ? 'expanded' : 'collapsed'">
-        <button mat-icon-button type="button" color="warn" (click)="onToggleFav(book.id, book.favourite)">
+        <button mat-icon-button type="button" color="warn"
+          (click)="onToggleFav(book.id, book.favourite)" class="favourite">
           <mat-icon>{{ book.favourite ? 'favorite' : 'favorite_border'}}</mat-icon>
         </button>
         Categories: {{book.categories}} <br />

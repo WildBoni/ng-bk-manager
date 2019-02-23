@@ -99,7 +99,15 @@ tr.book-row:not(.expanded-row):active {
   padding: 16px;
 }
 
+.mat-column-title {
+  padding-right: 4px;
+}
+
 img {
   margin: 6px 6px 6px 0;
   max-height: 70px;
+}
+
+.favourite {
+  float: right;
 }
