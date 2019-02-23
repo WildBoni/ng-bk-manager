@@ -1,7 +1,7 @@
 <barcode-scanner-livestream type="ean" (valueChanges)="onValueChanges($event)"></barcode-scanner-livestream>
 <div [hidden]="!barcodeValue" class="scan-value">
     <h3>The scanner read: <strong>{{barcodeValue}}</strong></h3>
-    <button mat-flat-button color="accent" (click)="scanAgain()">Scan again</button>
+    <button mat-stroked-button color="primary" (click)="scanAgain()">Scan again</button>
 </div>
 <div *ngIf="books">
   <mat-card *ngFor="let book of books">
@@ -20,14 +20,14 @@
       <p>Pages: {{ book.volumeInfo.pageCount }}</p>
       <p>Publisher: {{ book.volumeInfo.publisher }}</p>
       <p>Published in: {{ book.volumeInfo.publishedDate }}</p>
+      <p>Ean Code: {{ book.ean13 }}</p>
       <!-- <p>Preview link: {{ book.volumeInfo.previewLink }}</p> -->
       <p *ngIf=" book.volumeInfo.previewLink">
         <a href="{{ book.volumeInfo.previewLink }}" target="_blank"
-          mat-flat-button color="primary">
+          mat-button color="primary">
           <i class="material-icons">picture_as_pdf</i> Preview
         </a>
       </p>
-      <p>Ean Code: {{ book.ean13 }}</p>
     </mat-card-content>
     <mat-card-actions>
       <button mat-flat-button color="accent"
