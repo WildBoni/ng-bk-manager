@@ -30,12 +30,14 @@
       <mat-error>Please enter a book title</mat-error>
     </mat-form-field>
     <hr>
-    <img [src]="bookImg" alt="">
-    <mat-form-field>
-      <input matInput
-      type="text" formControlName="thumbnail" placeholder="Image url">
-      <!-- <mat-error *ngIf="title.invalid">Please enter a book title</mat-error> -->
-    </mat-form-field>
+    <div *ngIf="mode == 'edit'">
+      <img [src]="bookImg" alt="">
+      <mat-form-field>
+        <input matInput
+        type="text" formControlName="thumbnail" placeholder="Image url">
+        <!-- <mat-error *ngIf="title.invalid">Please enter a book title</mat-error> -->
+      </mat-form-field>
+    </div>
     <div formArrayName="authors">
       <div>
         <h3>Authors</h3>

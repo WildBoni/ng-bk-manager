@@ -100,6 +100,10 @@ tr.book-row:not(.expanded-row):active {
   margin-top: 10px;
 }
 
+.book-controls .mat-stroked-button {
+  margin: 0 4px 0 4px;
+}
+
 .book-description {
   padding: 16px;
 }
