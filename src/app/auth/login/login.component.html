@@ -21,7 +21,9 @@
         #passwordInput="ngModel">
       <mat-error *ngIf="passwordInput.invalid">Please enter a valid password</mat-error>
     </mat-form-field>
-    <button
+    <re-captcha [(ngModel)]="loginFormCaptchaValue"
+      name="captcha" required></re-captcha>
+    <button [disabled]="!loginForm.valid"
       mat-flat-button
       color="accent"
       type="submit">Login
