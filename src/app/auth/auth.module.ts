@@ -13,7 +13,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 
 import { environment } from '../../environments/environment';
 
-const BACKEND_URL = environment.recaptcha;
+// const BACKEND_URL = environment.recaptcha;
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ const BACKEND_URL = environment.recaptcha;
   providers: [{
   provide: RECAPTCHA_SETTINGS,
   useValue: {
-    siteKey: BACKEND_URL,
+    siteKey: '6LfSwZMUAAAAANAc6Nf302V_Umn2UuA38QuUEhWR'
   } as RecaptchaSettings,
 }]
 })
