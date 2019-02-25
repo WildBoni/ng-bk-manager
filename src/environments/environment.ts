@@ -10,7 +10,7 @@
 export const environment = {
   production: false,
   apiUrl: "http://localhost:3000/api",
-  recaptcha: "6LdcxpMUAAAAALMOd9PLnkFtHiNatoMLr6_A1Kay"
+  recaptcha: "6LfSwZMUAAAAANAc6Nf302V_Umn2UuA38QuUEhWR"
 };
 
 /*
