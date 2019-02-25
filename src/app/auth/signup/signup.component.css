@@ -5,3 +5,7 @@ mat-spinner {
 mat-form-field {
   width: 100%;
 }
+
+.captcha-container {
+  margin: 10px 0 20px 0;
+}
