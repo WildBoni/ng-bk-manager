@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 import { AuthData } from './auth-data.model';
 
 const BACKEND_URL = environment.apiUrl + "/user/";
+declare var FB: any;
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +80,32 @@ export class AuthService {
         }, error => {
           this.authStatusListener.next(false);
         })
+  }
+
+  fbLogin(email: string, password: string, id: string){
+    const fbData: any = {email: email, password: password, id: id};
+    this.http
+      .post<{ token: string, expiresIn: number, userId: string }>(
+        BACKEND_URL + "fbLogin",
+        fbData
+      )
+      .subscribe(response => {
+        const token = response.token;
+        this.token = token;
+        if(token) {
+          const expiresInDuration = response.expiresIn;
+          this.setAuthTimer(expiresInDuration);
+          this.isAuthenticated = true;
+          this.userId = response.userId;
+          this.authStatusListener.next(true);
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+          this.saveAuthData(token, expirationDate, this.userId);
+          this.router.navigate(["/dashboard"]);
+        }
+      }, error => {
+        this.authStatusListener.next(false);
+      })
   }
 
   autoAuthUser() {

@@ -52,6 +52,7 @@ exports.createBook = (req, res, next) => {
     favourite: req.body.favourite
     // toRead: req.body.toRead
   });
+  console.log(req.userData.userId);
   book.save().then(createdBook => {
     res.status(201).json({
       message: "book added successfully!",

@@ -4,19 +4,25 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 
+declare var FB: any;
+
 @Component({
   styleUrls: ['./login.component.css'],
   templateUrl: './login.component.html'
 })
+
 
 export class LoginComponent {
   isLoading = false;
   private authStatusSub: Subscription;
 
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
+
     (window as any).fbAsyncInit = function() {
       FB.init({
         appId      : '375502226629393',
@@ -49,17 +55,18 @@ export class LoginComponent {
     this.authService.login(form.value.email, form.value.password);
   }
 
-  fbLogin(){
+  onFbLogin(){
     FB.login((response)=> {
-      console.log('submitLogin',response);
       if (response.authResponse) {
-        FB.api('/me', function(response) {
-          console.log(response);
+        const fbToken = response.authResponse.accessToken;
+        const userId = response.authResponse.userID;
+        FB.api('/me', {fields: 'id,name,email'}, (response) => {
+          this.authService.fbLogin(response.email, fbToken, userId);
         });
       } else {
         console.log('User login failed');
       }
-    });
+    }, {scope: 'email'});
   }
 
   ngOnDestroy() {

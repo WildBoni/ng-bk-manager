@@ -6,4 +6,6 @@ router.post("/signup", UserController.createUser);
 
 router.post("/login", UserController.userLogin);
 
+router.post("/fbLogin", UserController.fbLogin);
+
 module.exports = router;
