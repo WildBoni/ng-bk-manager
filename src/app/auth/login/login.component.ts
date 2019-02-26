@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -18,7 +18,8 @@ export class LoginComponent {
 
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public _zone: NgZone
   ) {}
 
   ngOnInit() {
@@ -61,7 +62,9 @@ export class LoginComponent {
         const fbToken = response.authResponse.accessToken;
         const userId = response.authResponse.userID;
         FB.api('/me', {fields: 'id,name,email'}, (response) => {
-          this.authService.fbLogin(response.email, fbToken, userId);
+          this._zone.run(()=>{
+            this.authService.fbLogin(response.email, fbToken, userId);
+          });
         });
       } else {
         console.log('User login failed');
