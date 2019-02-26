@@ -9,3 +9,7 @@ mat-form-field {
 .captcha-container {
   margin: 10px 0 20px 0;
 }
+
+.facebook-btn {
+  margin: 20px 10px;
+}

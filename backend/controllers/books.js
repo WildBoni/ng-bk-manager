@@ -1,6 +1,7 @@
 const Book = require('../models/book');
 
 exports.getBooks = (req, res, next) => {
+  console.log(req.userData);
   Book.find({creator: req.userData.userId})
   .sort({_id: -1})
   .then(documents => {

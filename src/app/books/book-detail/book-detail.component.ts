@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 
 import { Book } from '../book.model';
 import { BookService } from "../book.service";
-import { AuthService } from "../../auth/auth.service";
+// import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: 'app-book-detail',

@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 
 import { Book } from '../book.model';
 import { BookService } from '../book.service';
-import { AuthService } from '../../auth/auth.service';
+// import { AuthService } from '../../auth/auth.service';
 
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
@@ -62,8 +62,8 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private bookService: BookService,
-    private authService: AuthService
+    private bookService: BookService
+    // private authService: AuthService
   ) { }
 
   ngOnInit() {

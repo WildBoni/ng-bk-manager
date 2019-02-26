@@ -31,7 +31,11 @@
       type="submit">Login
     </button>
   </form>
-  <div>
-    <button type="button" class="btn" (click)="onFbLogin();">Login with facebook</button>
-  </div>
 </mat-card>
+<div>
+  <button mat-flat-button type="button" color="primary" class="facebook-btn"
+    (click)="onFbLogin();">Login with facebook</button>
+</div>
+<!-- <div class="fb-login-button" data-size="medium" data-button-type="login_with"
+data-auto-logout-link="false" data-use-continue-as="false"
+(click)="onFbLogin();"></div> -->
