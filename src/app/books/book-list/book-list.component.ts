@@ -7,6 +7,7 @@ import {
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import { Subscription } from 'rxjs';
+import { UIService } from '../../shared/ui.service';
 
 import { Book } from '../book.model';
 import { BookService } from '../book.service';
@@ -39,6 +40,7 @@ export class BookListComponent implements OnInit, OnDestroy {
   // bookFav: boolean = false;
   // bookId: string;
   private bookSub: Subscription;
+  private deleteSub: Subscription;
 
   displayedColumns: string[] = ['image', 'title', 'authors'];
   dataSource = new MatTableDataSource<Book>();
@@ -62,7 +64,8 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private bookService: BookService
+    private bookService: BookService,
+    private uiService: UIService
     // private authService: AuthService
   ) { }
 
@@ -103,7 +106,18 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(bookId: string) {
-    this.isLoading = true;
+    let bookToBeDeleted: string = bookId;
+    this.bookService.deleteBookDialog();
+    this.deleteSub = this.uiService.getDeleteStatusListener()
+      .subscribe((status: boolean) => {
+        this.isLoading = true;
+        if(status === true) {
+          this.delete(bookToBeDeleted);
+        }
+      });
+  }
+
+  delete(bookId) {
     this.bookService.deleteBook(bookId).subscribe(() => {
       this.bookService.getBooks();
     });

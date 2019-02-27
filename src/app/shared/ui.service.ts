@@ -10,6 +10,7 @@ import { DialogComponent } from './dialog/dialog.component';
 })
 export class UIService {
   private scanStatus = new Subject<boolean>();
+  private deleteStatus = new Subject<boolean>();
 
   // loadingStateChanged = new Subject<boolean>();
   constructor(
@@ -20,6 +21,10 @@ export class UIService {
 
   getScanStatusListener() {
     return this.scanStatus.asObservable();
+  }
+
+  getDeleteStatusListener() {
+    return this.deleteStatus.asObservable();
   }
 
   showSnackbar(message, action, duration) {
@@ -70,7 +75,9 @@ export class UIService {
     description: string,
     goToBooks: boolean,
     addAnotherBook: boolean,
-    scanAgain: boolean
+    scanAgain: boolean,
+    confirmDelete: boolean,
+    cancelDelete: boolean
   ) {
     // const dialogConfig = new MatDialogConfig();
     //
@@ -83,14 +90,18 @@ export class UIService {
         description: description,
         goToBooks: goToBooks,
         addAnotherBook: addAnotherBook,
-        scanAgain: scanAgain
+        scanAgain: scanAgain,
+        confirmDelete: confirmDelete,
+        cancelDelete: cancelDelete
       }
     });
 
-    // dialogRef.close('Closed!');
-    //
     dialogRef.afterClosed().subscribe(result => {
+      if(result == "start") {
        this.scanStatus.next(true);
+     } else if (result == "delete") {
+       this.deleteStatus.next(true);
+     }
     });
 
   }

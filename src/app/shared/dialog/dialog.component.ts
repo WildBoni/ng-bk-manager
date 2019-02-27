@@ -20,6 +20,8 @@ export class DialogComponent {
   addAnotherBook: boolean = this.data.addAnotherBook;
   scanAgain: boolean = this.data.scanAgain;
   goToLogin: boolean = this.data.goToLogin;
+  confirmDelete: boolean = this.data.confirmDelete;
+  cancelDelete: boolean = this.data.cancelDelete;
 
   navigateTo(){
     this.dialogRef.close();
@@ -33,5 +35,13 @@ export class DialogComponent {
 
   scanAnother(){
     this.dialogRef.close("start");
+  }
+
+  delete(){
+    this.dialogRef.close("delete");
+  }
+
+  noDelete(){
+    this.dialogRef.close("cancel");
   }
 }

@@ -7,7 +7,7 @@ import { UIService } from '../../shared/ui.service';
 import { GoogleBookApiService } from '../google-book-api.service';
 // import { Book } from '../book';
 
-import { Subscription, Observable, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-scanner',

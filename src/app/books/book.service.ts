@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, share } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Book } from './book.model';
@@ -125,7 +125,9 @@ export class BookService {
              'What do you want to do now?',
              true,
              false,
-             true
+             true,
+             false,
+             false
            );
          });
          break;
@@ -142,6 +144,8 @@ export class BookService {
              'What do you want to do now?',
              true,
              true,
+             false,
+             false,
              false
            );
          });
@@ -214,10 +218,24 @@ export class BookService {
         });
   }
 
+  deleteBookDialog() {
+    this.uiService.showDialog(
+      'Ready to destroy!',
+      'Do you really want to delete this book?',
+      false,
+      false,
+      false,
+      true,
+      true
+    );
+  }
+
   deleteBook(bookId: string) {
     return this.http
-      .delete(BACKEND_URL + bookId);
+      .delete(BACKEND_URL + bookId).pipe(share());
   }
+
+
 
   goBack(): void {
     this.location.back();
