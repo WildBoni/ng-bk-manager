@@ -1,7 +1,6 @@
 const Book = require('../models/book');
 
 exports.getBooks = (req, res, next) => {
-  console.log(req.userData);
   Book.find({creator: req.userData.userId})
   .sort({_id: -1})
   .then(documents => {
@@ -17,7 +16,7 @@ exports.getBooks = (req, res, next) => {
   });
 }
 
-exports.getBook = (req, res, next) => {
+exports.getBookById = (req, res, next) => {
   Book.findById(req.params.id).then(book => {
     if (book) {
       if (book.creator == req.userData.userId) {
@@ -33,6 +32,29 @@ exports.getBook = (req, res, next) => {
   .catch(error => {
     res.status(500).json({
       message: "Fetching book failed!"
+    });
+  });
+}
+
+exports.getBookByEan = (req, res, next) => {
+  Book.findOne(
+    {creator: req.userData.userId, ean13: req.params.ean13},
+    {ean13: req.params.ean13, creator: req.userData.userId}
+  ).then(book => {
+    if (book) {
+      if (book.creator == req.userData.userId) {
+        res.status(200).json({found: true});
+      } else {
+        res.status(200).json({found: false});
+      }
+      // res.status(200).json(book);
+    } else {
+      res.status(200).json({found: false});
+    }
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Matching failed!"
     });
   });
 }
@@ -53,7 +75,6 @@ exports.createBook = (req, res, next) => {
     favourite: req.body.favourite
     // toRead: req.body.toRead
   });
-  console.log(req.userData.userId);
   book.save().then(createdBook => {
     res.status(201).json({
       message: "book added successfully!",

@@ -22,6 +22,7 @@ export class DialogComponent {
   goToLogin: boolean = this.data.goToLogin;
   confirmDelete: boolean = this.data.confirmDelete;
   cancelDelete: boolean = this.data.cancelDelete;
+  confirmAdd: boolean = this.data.confirmAdd;
 
   navigateTo(){
     this.dialogRef.close();
@@ -35,6 +36,10 @@ export class DialogComponent {
 
   scanAnother(){
     this.dialogRef.close("start");
+  }
+
+  addAnyway(){
+    this.dialogRef.close("add");
   }
 
   delete(){

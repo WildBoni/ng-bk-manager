@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get("", checkAuth, BookController.getBooks);
 
-router.get("/:id", checkAuth, BookController.getBook)
+router.get("/:id", checkAuth, BookController.getBookById);
+
+router.get("/ean/:ean13", checkAuth, BookController.getBookByEan);
 
 router.post("", checkAuth, BookController.createBook);
 

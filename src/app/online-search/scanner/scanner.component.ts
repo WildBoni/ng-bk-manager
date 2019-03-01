@@ -21,6 +21,9 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
 
   books: any[];
   private scanSub: Subscription;
+  private addSub: Subscription;
+  private apiSub: Subscription;
+  private getBookSub: Subscription;
 
   constructor(
     private googleBookApiService: GoogleBookApiService,
@@ -65,8 +68,37 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
   }
 
   searchResult(ean) {
+    if(this.apiSub) {
+      this.apiSub.unsubscribe();
+    }
+    if(this.getBookSub) {
+      this.getBookSub.unsubscribe();
+    }
+    if(this.addSub) {
+      this.addSub.unsubscribe();
+    }
     if(ean != "") {
-      this.googleBookApiService.searchBooksByEan(ean)
+      this.getBookSub = this.bookService.getBookByEan(ean)
+        .subscribe(result => {
+          if(result.found == true) {
+            this.bookService.addAnywayDialog();
+            this.addSub = this.uiService.getAddStatusListener()
+              .subscribe((status: boolean) => {
+                if(status === true) {
+                  this.searchByEan(ean);
+                }
+              });
+          } else {
+            this.searchByEan(ean);
+          }
+        })
+    } else {
+      this.books = [];
+    }
+  }
+
+  searchByEan(ean) {
+    this.apiSub = this.googleBookApiService.searchBooksByEan(ean)
       .subscribe(result => {
         result.map((item) => {
           if(item.volumeInfo.imageLinks) {
@@ -94,9 +126,6 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
         });
         this.books = result;
       });
-    } else {
-      this.books = [];
-    }
   }
 
   goBack() {
@@ -107,6 +136,9 @@ export class ScannerComponent implements AfterViewInit, OnDestroy {
     this.BarecodeScanner.stop();
     if(this.scanSub) {
       this.scanSub.unsubscribe();
+    }
+    if(this.addSub) {
+      this.addSub.unsubscribe();
     }
   }
 

@@ -4,7 +4,7 @@ import {
   OnDestroy,
   ViewChild
 } from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { Subscription } from 'rxjs';
 import { UIService } from '../../shared/ui.service';

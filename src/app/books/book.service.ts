@@ -88,6 +88,12 @@ export class BookService {
     );
   }
 
+  getBookByEan(ean: string) {
+    return this.http.get<{found: boolean}>(
+      BACKEND_URL + "ean/" + ean
+    );
+  }
+
   addBook(mode: string, title: string, authors: string[], thumbnail: string,
     languages: string[], categories: string[], pageCount: number,
     publisher: string, publishedDate: string, previewLink: string,
@@ -113,7 +119,7 @@ export class BookService {
     switch (mode)
     {
        case "scan":
-         this.http
+         return this.http
          .post<{message: string, bookId: string}>(BACKEND_URL, book)
          .subscribe((responseData) => {
            const id = responseData.bookId;
@@ -127,10 +133,11 @@ export class BookService {
              false,
              true,
              false,
+             false,
              false
            );
          });
-         break;
+       break;
        default:
          this.http
          .post<{message: string, bookId: string}>(BACKEND_URL, book)
@@ -144,6 +151,7 @@ export class BookService {
              'What do you want to do now?',
              true,
              true,
+             false,
              false,
              false,
              false
@@ -226,6 +234,20 @@ export class BookService {
       false,
       false,
       true,
+      true,
+      false
+    );
+  }
+
+  addAnywayDialog() {
+    this.uiService.showDialog(
+      'You already scanned this book!',
+      'Do you want to add it another time?',
+      false,
+      false,
+      true,
+      false,
+      false,
       true
     );
   }
@@ -234,8 +256,6 @@ export class BookService {
     return this.http
       .delete(BACKEND_URL + bookId).pipe(share());
   }
-
-
 
   goBack(): void {
     this.location.back();

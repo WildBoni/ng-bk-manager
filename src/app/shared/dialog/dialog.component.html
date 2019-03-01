@@ -9,4 +9,5 @@
   <button mat-button *ngIf="goToLogin" (click)="navigateToLogin()" color="warn">Go to Login</button>
   <button mat-button *ngIf="confirmDelete" (click)="delete()" color="warn">Yes</button>
   <button mat-button *ngIf="cancelDelete" (click)="noDelete()" color="warn">No</button>
+  <button mat-button *ngIf="confirmAdd" (click)="addAnyway()" color="primary">Continue anyway</button>
 </mat-dialog-actions>

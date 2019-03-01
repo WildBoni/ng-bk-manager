@@ -17,9 +17,9 @@ These are the main features (please note that NGBKMNGR is still under developmen
 - [x] Advanced search filters
 - [x] Login / Signup with different accounts (JWT)
 - [x] PWA behaviour: visit the website and add it to your home screen
-- [ ] Login / Signup with Facebook / Google accounts
+- [x] Login / Signup with Facebook / Google accounts
 - [ ] Add books to wishlist
-- [ ] Add books to favourites
+- [x] Add books to favourites
 - [ ] Keep track of books you lend
 - [ ] Rate and review books
 - [ ] Find other users with same interests
